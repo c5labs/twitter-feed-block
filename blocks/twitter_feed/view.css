@@ -1,0 +1,43 @@
+.tf-tweets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tf-tweet {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.tf-tweets.avatars .tf-tweet {
+    padding-left: 60px;
+}
+
+.tf-tweet:last-child {
+    margin-bottom: 0;
+}
+
+.tf-tweet .tf-name {
+    font-weight: bold;
+}
+
+.tf-tweet .tf-avatar {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.tf-tweet .tf-avatar img {
+    max-width: 100%;
+    max-height: auto;
+}
+
+.tf-tweet .tf-date {
+    color: #999;
+}
+
+.tf-tweet .tf-media {
+    margin: 10px 0;
+    display: block;
+}

@@ -1,0 +1,97 @@
+<?php
+defined('C5_EXECUTE') or die('Access Denied.');
+/**
+ * General Form Tab
+ *
+ * @package  TwitterFeedPackage
+ * @author   Oliver Green <green2go@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GPL3
+ * @link     http://codeblog.co.uk
+ */
+?>
+<div role="tabpanel" class="tab-pane active" id="general">
+
+    <div class="form-group" <?php if(count($account_list) <= 1) { ?>style="display: none;"<?php } ?>>
+        <?php echo $form->label('use_account', t('Use account'))?>
+        <?php echo $form->select(
+            'use_account',
+            $account_list,
+            $use_account,
+            array('style' => 'border: 1px solid #ccc')
+            ); ?>
+        <script>
+            $(function () {
+                $("#use_account").select2();
+            });
+        </script>
+    </div>
+
+    <div class="form-group">
+        <?php echo $form->label('show_tweets_from', t('Show tweets from'))?>
+        <div class="row">
+            <div class="col-xs-6">
+                <?php echo $form->select(
+                    'show_tweets_type',
+                    $type_list,
+                    $show_tweets_type,
+                    array('style' => 'border: 1px solid #ccc')
+                ); ?>
+                <script>
+                    $(function () {
+                        var first_load = true;
+                        $("#show_tweets_type").change(function () {
+                            var $input = $('#show_tweets_from'),
+                                $input_addon = $(this).parent().parent().find('.input-group-addon'),
+                                val = $(this).val();
+
+                            if (!first_load) $input.val('');
+
+                            switch (val) {
+                                case 'user':
+                                    $input_addon.html('@');
+                                    $input.attr('placeholder', 'concrete5');
+                                break;
+                                case 'hashtag':
+                                    $input_addon.html('#');
+                                    $input.attr('placeholder', 'concrete5');
+                                break;
+                                case 'list':
+                                    $input_addon.html('<span class="fa fa-list"></span>');
+                                    $input.attr('placeholder', 'olsgreen/concrete5');
+                                break;
+                                case 'search':
+                                    $input_addon.html('<span class="fa fa-search"></span>');
+                                    $input.attr('placeholder', 'your search term');
+                                break;
+                            }
+
+                            first_load = false;
+                        }).trigger('change');
+                    });
+                </script>
+            </div>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <span class="input-group-addon">@</span>
+                    <?php echo $form->text('show_tweets_from', $show_tweets_from); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo $form->label('num_tweets', t('Show'))?>
+        <div class="input-group col-xs-4">
+            <?php echo $form->text('num_tweets', $num_tweets); ?>
+            <span class="input-group-addon">tweets</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo $form->label('refresh_interval', t('Refresh every'))?>
+        <div class="input-group col-xs-4">
+            <?php echo $form->text('refresh_interval', $refresh_interval); ?>
+            <span class="input-group-addon">minutes</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+    <table name="btTwitterFeed">
+        <field name="bID" type="I">
+            <key />
+            <unsigned />
+        </field>
+        <field name="refresh_interval" type="I">
+            <unsigned />
+            <notnull />
+            <default value="300" />
+        </field>
+        <field name="num_tweets" type="I">
+            <unsigned />
+            <notnull />
+            <default value="5" />
+        </field>
+        <field name="show_replies" type="I">
+            <unsigned />
+            <notnull />
+            <default value="0" />
+        </field>
+        <field name="show_retweets" type="I">
+            <unsigned />
+            <notnull />
+            <default value="0" />
+        </field>
+        <field name="show_authors" type="I">
+            <unsigned />
+            <notnull />
+            <default value="1" />
+        </field>
+        <field name="show_date" type="I">
+            <unsigned />
+            <notnull />
+            <default value="1" />
+        </field>
+        <field name="expand_pictures" type="I">
+            <unsigned />
+            <notnull />
+            <default value="1" />
+        </field>
+        <field name="show_avatars" type="I">
+            <unsigned />
+            <notnull />
+            <default value="1" />
+        </field>
+        <field name="use_account" type="I"></field>
+        <field name="show_tweets_type" type="C" size="255"></field>
+        <field name="show_tweets_from" type="C" size="255"></field>
+    </table>
+
+    <table name="btTwitterFeedAuthorizations">
+        <field name="acID" type="I">
+            <key />
+            <unsigned />
+            <autoincrement />   
+        </field>
+        <field name="twitter_handle" type="C" size="255"></field>
+        <field name="oauth_token" type="C" size="255"></field>
+        <field name="oauth_token_secret" type="C" size="255"></field>
+        <field name="access_token" type="C" size="255"></field>
+        <field name="access_token_secret" type="C" size="255"></field>
+    </table>
+
+</schema>
