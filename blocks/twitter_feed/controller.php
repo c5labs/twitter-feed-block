@@ -6,7 +6,7 @@ use Database;
 use BlockType;
 use Package;
 use Concrete\Core\Block\BlockController;
-use Concrete\Package\TwitterFeedPackage\Src\AuthorizationEntryRepository;
+use Concrete\Package\TwitterFeedPackage\Src\AuthorizedAccountRepository;
 use Concrete\Package\TwitterFeedPackage\Src\TwitterFeedService;
 use Concrete\Package\TwitterFeedPackage\Src\TwitterFeedFormatter;
 
@@ -57,7 +57,7 @@ class Controller extends BlockController
     protected function getAccountRepository()
     {
         if (is_null($this->account_repository)) {
-            $this->account_repository = new AuthorizationEntryRepository(Database::get()); // SHOULD BE IOC
+            $this->account_repository = new AuthorizedAccountRepository(Database::get()); // SHOULD BE IOC
         }
         return $this->account_repository;
     }

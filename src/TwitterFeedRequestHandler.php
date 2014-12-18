@@ -131,7 +131,7 @@ class TwitterFeedRequestHandler
      */
     protected function getAuthorizationRepository()
     {
-        return new AuthorizationEntryRepository(Database::get());
+        return new AuthorizedAccountRepository(Database::get());
     }
 
     /**

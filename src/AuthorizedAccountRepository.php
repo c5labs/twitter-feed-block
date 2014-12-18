@@ -1,7 +1,7 @@
 <?php
 namespace Concrete\Package\TwitterFeedPackage\Src;
 
-class AuthorizationEntryRepository
+class AuthorizedAccountRepository
 {
     protected $db;
 

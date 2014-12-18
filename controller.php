@@ -18,7 +18,7 @@ use Asset;
 use AssetList;
 use Concrete\Package\TwitterFeedPackage\Src\TwitterFeedRequestHandler;
 use Concrete\Package\TwitterFeedPackage\Src\TwitterFeedService;
-use Concrete\Package\TwitterFeedPackage\Src\AuthorizationEntryRepository;
+use Concrete\Package\TwitterFeedPackage\Src\AuthorizedAccountRepository;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
