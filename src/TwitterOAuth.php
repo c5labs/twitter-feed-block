@@ -1,15 +1,25 @@
 <?php
+/**
+ * Twitter oAuth & oAuth Library File
+ * 
+ * Not pretty or standards compliant, it works. And until 
+ * we get a better resolution to the issues with using composer 
+ * within C5 packages, it will do.
+ *
+ * PHP version 5.3
+ *
+ * @package  TwitterFeedPackage
+ * @author   Oliver Green <green2go@gmail.com>
+ * @link     http://codeblog.co.uk
+ */
 namespace Concrete\Package\TwitterFeedPackage\Src;
 
+defined('C5_EXECUTE') or die('Access Denied.');
 /*
  * Abraham Williams (abraham@abrah.am) http://abrah.am
  *
  * The first PHP Library to support OAuth for Twitter's REST API.
  */
-
-/* Load OAuth lib. You can find it at http://oauth.net */
-//require_once('OAuth.php');
-
 /**
  * Twitter OAuth class
  */

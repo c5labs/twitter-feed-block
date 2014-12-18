@@ -65,6 +65,7 @@ class Controller extends Package
     /**
      * Twitter oAuth Consumer Key Secret
      * Same as above ^
+     * 
      * @var string
      */
     protected $twitterConsumerSecret = 'YGqAvTJqE1bIgAOT9ZGHKh00mvyqeaFvWYwtO1ZLe542lf0WZo';
