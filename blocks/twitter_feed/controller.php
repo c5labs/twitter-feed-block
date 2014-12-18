@@ -347,6 +347,8 @@ class Controller extends BlockController
                     'request_endpoint' => 'search/tweets',
                 );
             break;
+            default:
+                return array();
         }
     }
 
@@ -376,7 +378,9 @@ class Controller extends BlockController
     {
         $account = $this->getAccountRepository()->getEntryByID($this->use_account);
         $params = $this->getCurrentRequestParams();
-        $this->getTwitterService()->clearCache($account, $params);
+        if (is_array($account) && is_array($params)) {
+            $this->getTwitterService()->clearCache($account, $params);
+        }
     }
 
     /**
