@@ -177,6 +177,32 @@ class TwitterFeedFormatter
     }
 
     /**
+     * Emoji Remover (until we add support for emojis)
+     *
+     * @param  string $text
+     * @return string
+     */
+    protected function removeEmoji($text) {
+        return preg_replace('/[\xF0-\xF7][\x80-\xBF]{3}/', '', $text);
+    }
+
+    /**
+     * Multi-byte aware string replace function
+     *
+     * @param  string $string
+     * @param  string $replacement
+     * @param  integer $start
+     * @param  integer $length
+     * @return string
+     */
+    protected function mb_substr_replace($string, $replacement, $start, $length = 0)
+    {
+        $str = mb_substr($string, 0, $start) . $replacement;
+        if ($length > 0) $str .= mb_substr($string, $start + $length);
+        return $str;
+    }
+
+    /**
      * Gets a formatter for a specific entity type
      *
      * @see    getDefaultFormatters()
@@ -262,7 +288,7 @@ class TwitterFeedFormatter
         });
 
         foreach ($replacements as $i) {
-            $tweet_txt = substr_replace($tweet_txt, $i['r'], $i['s'], $i['e'] - $i['s']);
+            $tweet_txt = $this->mb_substr_replace($tweet_txt, $i['r'], $i['s'], $i['e'] - $i['s']);
         }
 
         return $tweet_txt;
@@ -314,7 +340,7 @@ class TwitterFeedFormatter
             $tweet = $args[0];
         }
 
-        $expanded_tweet = $this->expand($tweet, $options);
+        $expanded_tweet = $this->removeEmoji($this->expand($tweet, $options));
         $tweet->original_text = $tweet_txt;
         $tweet->text = $expanded_tweet;
 
