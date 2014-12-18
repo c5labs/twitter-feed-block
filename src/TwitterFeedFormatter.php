@@ -2,12 +2,6 @@
 /**
  * Twitter Feed Formatter File
  *
- * Utility class to expand a tweets entities and also tweak the
- * format the tweet object into more easily usable format.
- *
- * If you aren't familiar with tweet entities you may find this link useful:
- * https://dev.twitter.com/overview/api/entities-in-twitter-objects
- *
  * PHP version 5.3
  *
  * @package  TwitterFeedPackage
@@ -24,6 +18,12 @@ defined('C5_EXECUTE') or die('Access Denied.');
 
 /**
  * Twitter Feed Formatter Class
+ *
+ * Utility class to expand a tweets entities and also tweak the
+ * format the tweet object into more easily usable format.
+ *
+ * If you aren't familiar with tweet entities you may find this link useful:
+ * https://dev.twitter.com/overview/api/entities-in-twitter-objects
  *
  * @package  TwitterFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
@@ -205,12 +205,12 @@ class TwitterFeedFormatter
         array $formatter_opts
     ) {
         foreach ($entities as $obj) {
-                $replacements[] = array(
-                    's' => $obj->indices[0],
-                    'e' => $obj->indices[1],
-                    'r' => $formatter($obj, $formatter_opts),
-                );
-            }
+            $replacements[] = array(
+                's' => $obj->indices[0],
+                'e' => $obj->indices[1],
+                'r' => $formatter($obj, $formatter_opts),
+            );
+        }
         return $replacements;
     }
 
@@ -236,9 +236,9 @@ class TwitterFeedFormatter
 
             if (is_array($tweet->entities->$k) && count($tweet->entities->$k) > 0) {
                 $this->prepareEntities(
-                    $tweet->entities->$k, 
-                    $this->getFormatter($k), 
-                    $replacements, 
+                    $tweet->entities->$k,
+                    $this->getFormatter($k),
+                    $replacements,
                     $formatter_opts
                 );
             }
@@ -257,7 +257,9 @@ class TwitterFeedFormatter
     protected function processReplacements($tweet, $replacements)
     {
         $tweet_txt = $tweet->text;
-        usort($replacements, function($a,$b){return($b['s']-$a['s']);});
+        usort($replacements, function ($a, $b) {
+            return($b['s']-$a['s']);
+        });
 
         foreach ($replacements as $i) {
             $tweet_txt = substr_replace($tweet_txt, $i['r'], $i['s'], $i['e'] - $i['s']);
@@ -284,7 +286,7 @@ class TwitterFeedFormatter
     }
 
     /**
-     * Formats a tweet by expanding the entities, humanizing the 
+     * Formats a tweet by expanding the entities, humanizing the
      * date and peforming tweaks to the object structure
      *
      * @param  object $tweet | array $tweets

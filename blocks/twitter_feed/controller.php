@@ -1,4 +1,14 @@
 <?php
+/**
+ * Block Controller File
+ *
+ * PHP version 5.3
+ *
+ * @package  TwitterFeedPackage
+ * @author   Oliver Green <green2go@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GPL3
+ * @link     http://codeblog.co.uk
+ */
 namespace Concrete\Package\TwitterFeedPackage\Block\TwitterFeed;
 
 use Core;
@@ -11,49 +21,139 @@ use Concrete\Package\TwitterFeedPackage\Src\TwitterFeedService;
 use Concrete\Package\TwitterFeedPackage\Src\TwitterFeedFormatter;
 
 defined('C5_EXECUTE') or die('Access Denied.');
+
 /**
- * The controller for the box block.
+ * Block Controller Class
  *
- * @package Blocks
- * @subpackage Content
- * @author Oliver Green <oliver@devisegraphics.co.uk>
- * @license GPL
- *
+ * @package  TwitterFeedPackage
+ * @author   Oliver Green <green2go@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GPL3
+ * @link     http://codeblog.co.uk
  */
-class Controller extends BlockController 
+class Controller extends BlockController
 {
+    /**
+     * Block Table
+     *
+     * @var string
+     */
     protected $btTable = 'btTwitterFeed';
+
+    /**
+     * Block Editor Interface Width
+     * @var string
+     */
     protected $btInterfaceWidth = "465";
+
+    /**
+     * Block Editor Interface Height
+     * @var string
+     */
     protected $btInterfaceHeight = "365";
+
+    /**
+     * Cache the blocks database record?
+     *
+     * @var boolean
+     */
     protected $btCacheBlockRecord = true;
+
+    /**
+     * Cache the blocks output?
+     *
+     * @var boolean
+     */
     protected $btCacheBlockOutput = false;
+
+    /**
+     * Cache the block output for $_POST requests?
+     *
+     * @var boolean
+     */
     protected $btCacheBlockOutputOnPost = false;
+
+    /**
+     * Cache the blocks output for registered users?
+     *
+     * @var boolean
+     */
     protected $btCacheBlockOutputForRegisteredUsers = false;
+
+    /**
+     * How long do we cache the block for?
+     *
+     * CACHE_LIFETIME = Until manually cleared or the
+     * block is updated via the editor.
+     *
+     * @var integer
+     */
+    protected $btCacheBlockOutputLifetime = CACHE_LIFETIME;
+
+
+    /**
+     * The set within the block chooser interface
+     * that this block belongs to.
+     *
+     * @var string
+     */
     protected $btDefaultSet = 'social';
 
     /**
-     *  CSRF -> Validation\CSRF\Token all forms and routes
-     *  Load tweets via AJAX so not to slow page load?? Or background job?
-     *  Translations
+     * Account respository instance
+     *
+     * @todo IOC, IOC, IOC
+     * @var AuthorizedAccountRepository
      */
-    
     protected $account_repository;
+
+    /**
+     * Twitter Feed Service
+     *
+     * Used to making all requests to twitter, including
+     * authorizing the account, etc.
+     *
+     * @todo IOC, IOC, IOC
+     * @var TwitterFeedService
+     */
     protected $twitter_feed_service;
 
-    public function getBlockTypeDescription() {
-        return t("Displays a list of users latest tweets.");
-    }
-
-    public function getBlockTypeName() {
+    /**
+     * Block Name
+     *
+     * @return string
+     */
+    public function getBlockTypeName()
+    {
         return t("Twitter Feed");
     }
 
+    /**
+     * Block Description
+     *
+     * @return string
+     */
+    public function getBlockTypeDescription()
+    {
+        return t("Displays a list of users latest tweets.");
+    }
+
+    /**
+     * Gets this blocks package object
+     *
+     * @return Package
+     */
     public function getPackageObject()
     {
         $bt = BlockType::getByHandle($this->btHandle);
         return Package::getByID($bt->getPackageID());
     }
 
+    /**
+     * Gets an instance of the AuthorizedAccountRespository
+     *
+     * @todo IOC, IOC, IOC
+     * @return AuthorizedAccountRepository
+     */
     protected function getAccountRepository()
     {
         if (is_null($this->account_repository)) {
@@ -62,6 +162,12 @@ class Controller extends BlockController
         return $this->account_repository;
     }
 
+    /**
+     * Gets an instance of the TwitterFeedService
+     *
+     * @todo IOC, IOC, IOC
+     * @return TwitterFeedService
+     */
     protected function getTwitterService()
     {
         if (is_null($this->twitter_feed_service)) {
@@ -76,6 +182,11 @@ class Controller extends BlockController
         return $this->twitter_feed_service;
     }
 
+    /**
+     * Gets an instance of the TweetFeedFormatter
+     *
+     * @return TwitterFeedFormatter
+     */
     protected function getFormatter()
     {
         // Twitter formatter options
@@ -92,11 +203,16 @@ class Controller extends BlockController
             $format_options[] = 'media';
         } else {
             $format_options[] = array('media', 'links');
-        } 
+        }
         $formatter->setDefaultOptions($format_options);
         return $formatter;
     }
 
+    /**
+     * Load Hook
+     *
+     * @return void
+     */
     protected function load()
     {
         parent::load();
@@ -105,6 +221,12 @@ class Controller extends BlockController
         $this->set('use_accounts', $value);
     }
 
+    /**
+     * Save Hook
+     *
+     * @param  array  $args
+     * @return boolean
+     */
     public function save($args = array())
     {
         $args['use_accounts'] = json_encode($args['use_accounts']);
@@ -127,6 +249,11 @@ class Controller extends BlockController
         return parent::save($args);
     }
 
+    /**
+     * Add Form Hook
+     *
+     * @return  void
+     */
     public function add()
     {
         // Defaults
@@ -143,11 +270,21 @@ class Controller extends BlockController
         $this->form();
     }
 
+    /**
+     * Edit Form Hook
+     *
+     * @return void
+     */
     public function edit()
     {
         $this->form();
     }
 
+    /**
+     * Prepares resources for the blocks form / editor view
+     *
+     * @return void
+     */
     protected function form()
     {
         $this->requireAsset('css', 'twitterfeed/form');
@@ -175,6 +312,13 @@ class Controller extends BlockController
         $this->set('type_list', $type_list);
     }
 
+    /**
+     * Gets parameter sets for the various types
+     * of feed we offer users
+     *
+     * @param  string $type
+     * @return array
+     */
     protected function getRequestTypeParameters($type)
     {
         switch ($type) {
@@ -204,12 +348,17 @@ class Controller extends BlockController
         }
     }
 
+    /**
+     * View Hook
+     *
+     * @return void
+     */
     public function view()
     {
         $account = $this->getAccountRepository()->getEntryByID($this->use_account);
         $this->set('account', $account);
 
-        if (is_array($account)) {   
+        if (is_array($account)) {
 
             $params = array(
                 'count' => $this->num_tweets * 10,
