@@ -407,10 +407,15 @@ class Controller extends BlockController
                     $tweets = $tweets->statuses;
                 }
 
-                $tweets = array_slice($tweets, 0, $this->num_tweets);
-                $formatter = $this->getFormatter();
-                $tweets = $formatter->format($tweets, $format_options);
-                $this->set('tweets', $tweets);
+                if (is_array($tweets)) {
+                    $tweets = array_slice($tweets, 0, $this->num_tweets);
+                    $formatter = $this->getFormatter();
+                    $tweets = $formatter->format($tweets, $format_options);
+                    $this->set('tweets', $tweets);
+                } else {
+                    $this->set('error', t('The twitter feed returned was in a bad format.'));
+                    $this->set('tweets', array());
+                }
             }
         }
     }
