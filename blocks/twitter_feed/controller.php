@@ -246,6 +246,8 @@ class Controller extends BlockController
             }
         }
 
+        $this->clearCache();
+
         return parent::save($args);
     }
 
@@ -349,6 +351,35 @@ class Controller extends BlockController
     }
 
     /**
+     * Get the request parameters for the current configuration
+     * 
+     * @return array
+     */
+    protected function getCurrentRequestParams()
+    {
+        $params = array(
+            'count' => $this->num_tweets * 10,
+            'exclude_replies' => ('1' == $this->show_replies) ?  'false' : 'true',
+            'include_rts' => $this->show_retweets,
+            'contributor_details' => 'false',
+        );
+        $params = array_merge($params, $this->getRequestTypeParameters($this->show_tweets_type));
+        return $params;
+    }
+
+    /**
+     * Clear feed cache for the current configuration
+     * 
+     * @return void
+     */
+    protected function clearCache()
+    {
+        $account = $this->getAccountRepository()->getEntryByID($this->use_account);
+        $params = $this->getCurrentRequestParams();
+        $this->getTwitterService()->clearCache($account, $params);
+    }
+
+    /**
      * View Hook
      *
      * @return void
@@ -360,14 +391,7 @@ class Controller extends BlockController
 
         if (is_array($account)) {
 
-            $params = array(
-                'count' => $this->num_tweets * 10,
-                'exclude_replies' => ('1' == $this->show_replies) ?  'false' : 'true',
-                'include_rts' => $this->show_retweets,
-                'contributor_details' => 'false',
-            );
-            $params = array_merge($params, $this->getRequestTypeParameters($this->show_tweets_type));
-
+            $params = $this->getCurrentRequestParams();
             $tweets = $this->getTwitterService()->request($account, $params, ($this->refresh_interval * 60));
 
             if (isset($tweets->errors)) {

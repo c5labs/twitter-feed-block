@@ -165,6 +165,19 @@ class TwitterFeedService
     }
 
     /**
+     * Gets a cache key for the current feed based 
+     * on account & query parameters.
+     * 
+     * @param  array  $account
+     * @param  arra   $params 
+     * @return string
+     */
+    protected function getCacheKey(array $account, array $params)
+    {
+        return md5(implode('', array_merge($account, $params)));
+    }
+
+    /**
      * Makes a genric request to twitter with our long lasting
      * access tokens.
      *
@@ -176,8 +189,7 @@ class TwitterFeedService
     public function request(array $account, array $params, $cache_ttl = 300)
     {
         $cache = Core::make('cache/expensive');
-        $cache_key = md5(implode('', array_merge($account, $params)));
-        $item = $cache->getItem($cache_key);
+        $item = $cache->getItem($this->getCacheKey($account, $params));
 
         if ($item->isMiss()) {
             $response = $this->getConnection($account)->get($params['request_endpoint'], $params);
@@ -185,5 +197,19 @@ class TwitterFeedService
         }
 
         return $item->get();
+    }
+
+    /**
+     * Clears feed cache
+     * 
+     * @param  array  $account [description]
+     * @param  array  $params  [description]
+     * @return void
+     */
+    public function clearCache(array $account, array $params)
+    {
+        $cache = Core::make('cache/expensive');
+        $item = $cache->getItem($this->getCacheKey($account, $params));
+        $item->clear();
     }
 }
