@@ -36,39 +36,6 @@ defined('C5_EXECUTE') or die('Access Denied.');
                     $show_tweets_type,
                     array('style' => 'border: 1px solid #ccc')
                 ); ?>
-                <script>
-                    $(function () {
-                        var first_load = true;
-                        $("#show_tweets_type").change(function () {
-                            var $input = $('#show_tweets_from'),
-                                $input_addon = $(this).parent().parent().find('.input-group-addon'),
-                                val = $(this).val();
-
-                            if (!first_load) $input.val('');
-
-                            switch (val) {
-                                case 'user':
-                                    $input_addon.html('@');
-                                    $input.attr('placeholder', 'concrete5');
-                                break;
-                                case 'hashtag':
-                                    $input_addon.html('#');
-                                    $input.attr('placeholder', 'concrete5');
-                                break;
-                                case 'list':
-                                    $input_addon.html('<span class="fa fa-list"></span>');
-                                    $input.attr('placeholder', 'olsgreen/concrete5');
-                                break;
-                                case 'search':
-                                    $input_addon.html('<span class="fa fa-search"></span>');
-                                    $input.attr('placeholder', ccm_t('search-control-placeholder'));
-                                break;
-                            }
-
-                            first_load = false;
-                        }).trigger('change');
-                    });
-                </script>
             </div>
             <div class="col-xs-6">
                 <div class="input-group">

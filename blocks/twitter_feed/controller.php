@@ -264,6 +264,8 @@ class Controller extends BlockController
             'remove-account-button' => t('Remove'),
             'no-accounts-message' => t('No accounts authorized'),
             'search-control-placeholder' => t('your search term'),
+            'account-removal-failure' => 'Failed to remove the account, please try again later.',
+            'polling-problem' => 'There was a problem getting the status of the authorization, you will need to close and re-open the block editor window for the account to become visible.',
         );
     }
 

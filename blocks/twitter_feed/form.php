@@ -35,24 +35,12 @@ defined('C5_EXECUTE') or die('Access Denied.');
     </div>
 </div>
 <script>
-
-    function removeFirstRun()
-    {
-        $('#tfFormContainer').removeClass('tf-first-run');
-        $('#tfFormContainer .nav-tabs a').attr('data-toggle', 'tab').parent().removeClass('disabled');
-    }
-
-    function applyFirstRun()
-    {
-        $('#tfFormContainer .nav-tabs a:last').tab('show');
-        $('#tfFormContainer .nav-tabs a').removeAttr('data-toggle').parent().addClass('disabled');
-        $('#accounts').removeClass('active');
-        $('#firstRun').addClass('active');
-    }
-
-    <?php if (0 === count($account_list)) { ?>
     $(function () {
-        applyFirstRun();
-    });
+        var base_url = "<?php echo View::url('/twitter-feed-package'); ?>",
+            csrf_token = "<?php echo Core::make('helper/validation/token')->generate(); ?>",
+            tbe = new TwitterFeedBlockEditor(base_url, csrf_token);
+    <?php if (0 === count($account_list)) { ?>
+        tbe.applyFirstRun();
     <?php } ?>
+    });
 </script>
