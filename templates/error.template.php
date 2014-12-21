@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirecting to Twitter...</title>
+    <title><?php echo t('Authorization Error'); ?></title>
     <style>
         html,
         body {
@@ -39,6 +39,12 @@
         #message {
             display: table-cell;
             vertical-align: middle;
+            padding: 30px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -46,8 +52,10 @@
     <div class='outer'>
         <div id="message">
             <img src="{{ logo_url }}" alt="Twitter Feed">
-            <h1>@{{ twitter_handle }} has been authorized!</h1>
-            <p>You can close this window and head back to your site, have a nice day!</p>
+            <h1><?php echo t('Oh No! We had a problem.'); ?></h1>
+            <p><?php echo t('It looks like something went wrong, the error returned was:'); ?></p>
+            <p class="error">{{ error }}</p>
+            <p><?php echo t('Waiting a little while and trying again <i>may</i> fix the problem, we\'ve logged more information to the system error log.'); ?></p>
         </div>
     </div>
 </body>

@@ -375,6 +375,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
             })
             .fail(function() {
                 alert(ccm_t('polling-problem'));
+                stopPoll();
             })
             .always(function() {
                 requestInProgess = false;

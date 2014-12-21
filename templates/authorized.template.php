@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirecting to Twitter...</title>
+    <title><?php echo t('Account Authorized'); ?></title>
     <style>
         html,
         body {
@@ -46,16 +46,9 @@
     <div class='outer'>
         <div id="message">
             <img src="{{ logo_url }}" alt="Twitter Feed">
-            <h1>Standby, sending you to twitter...</h1>
-            <p>If you are not automatically redirected to twitter, <a href="{{ url }}">click here</a>.</p>
+            <h1><?php echo t('@{{ twitter_handle }} has been authorized!'); ?></h1>
+            <p><?php echo t('You can close this window and head back to your site, have a nice day!'); ?></p>
         </div>
     </div>
-    <script>
-        window.TwitterFeedOAuthToken = "{{ token }}";
-
-        window.onload = function () {
-            setTimeout(function () { window.location = '{{ url }}'; }, 2000);
-        };
-    </script>
 </body>
 </html>

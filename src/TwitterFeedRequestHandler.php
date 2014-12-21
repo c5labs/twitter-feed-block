@@ -158,7 +158,10 @@ class TwitterFeedRequestHandler
      */
     protected function compileFromFile($file, $data)
     {
-        $html = file_get_contents($file);
+        ob_start();
+        include($file);
+        $html = ob_get_contents();
+        ob_end_clean();
         return $this->compile($html, $data);
     }
 
@@ -183,7 +186,7 @@ class TwitterFeedRequestHandler
                 'logo_url' => $this->package->getRelativePath() . '/icon.png'
             )
         );
-        $html = $this->compileFromFile(__DIR__ . '/../templates/error.html', $template_data);
+        $html = $this->compileFromFile(__DIR__ . '/../templates/error.template.php', $template_data);
         header("HTTP/1.0 500 Server Error", true, 500);
         die($html);
     }
@@ -212,7 +215,7 @@ class TwitterFeedRequestHandler
             'url' => $data['url'],
             'logo_url' => $this->package->getRelativePath() . '/icon.png'
         );
-        $html = $this->compileFromFile(__DIR__ . '/../templates/redirect.html', $template_data);
+        $html = $this->compileFromFile(__DIR__ . '/../templates/redirect.template.php', $template_data);
         die($html);
     }
 
@@ -253,7 +256,7 @@ class TwitterFeedRequestHandler
             'twitter_handle' => $response['screen_name'],
             'logo_url' => $this->package->getRelativePath() . '/icon.png'
         );
-        $html = $this->compileFromFile(__DIR__ . '/../templates/authorized.html', $template_data);
+        $html = $this->compileFromFile(__DIR__ . '/../templates/authorized.template.php', $template_data);
         die($html);
     }
 

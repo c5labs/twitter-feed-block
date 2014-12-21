@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirecting to Twitter...</title>
+    <title><?php echo t('Redirecting to Twitter...'); ?></title>
     <style>
         html,
         body {
@@ -39,12 +39,6 @@
         #message {
             display: table-cell;
             vertical-align: middle;
-            padding: 30px;
-        }
-
-        .error {
-            color: red;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -52,11 +46,16 @@
     <div class='outer'>
         <div id="message">
             <img src="{{ logo_url }}" alt="Twitter Feed">
-            <h1>Oh No! We had a problem.</h1>
-            <p>It looks like something went wrong, the error returned was:</p>
-            <p class="error">{{ error }}</p>
-            <p>Waiting a little while and trying again <i>may</i> fix the problem, we've logged more information to the system error log.</p>
+            <h1><?php echo t('Standby, sending you to twitter...'); ?></h1>
+            <p><?php echo t('If you are not automatically redirected to twitter, <a href="{{ url }}">click here</a>.'); ?></p>
         </div>
     </div>
+    <script>
+        window.TwitterFeedOAuthToken = "{{ token }}";
+
+        window.onload = function () {
+            setTimeout(function () { window.location = '{{ url }}'; }, 2000);
+        };
+    </script>
 </body>
 </html>
