@@ -27,6 +27,11 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      */
     var first_load = true;
 
+    /**
+     * Holder for methods we'll make public
+     * 
+     * @type {Object}
+     */
     var expose = {};
 
     /**
@@ -246,7 +251,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
         if(oAuthWindow == null || oAuthWindow.closed) {
             oAuthWindow = window.open(
                 base_url + '/redirect?csrf_token=' + csrf_token, 
-                'twitter-oauth', 
+                'twitteroauth', 
                 'left=' + centre + ',height=650,width=' + width + ',dialog,modal'
             );
         } else {
@@ -260,8 +265,8 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      * @return {void}
      */  
     $('#addAccount, #retryBtn, #addFirstAccount').click(function () {
-        showAuthorizingScreen();
         openOAuthWindow();
+        showAuthorizingScreen();
         startPolling();
     });
 
