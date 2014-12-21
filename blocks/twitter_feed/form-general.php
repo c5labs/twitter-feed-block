@@ -61,7 +61,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
                                 break;
                                 case 'search':
                                     $input_addon.html('<span class="fa fa-search"></span>');
-                                    $input.attr('placeholder', 'your search term');
+                                    $input.attr('placeholder', ccm_t('search-control-placeholder'));
                                 break;
                             }
 
@@ -83,7 +83,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
         <?php echo $form->label('num_tweets', t('Show'))?>
         <div class="input-group col-xs-4">
             <?php echo $form->text('num_tweets', $num_tweets); ?>
-            <span class="input-group-addon">tweets</span>
+            <span class="input-group-addon"><?php echo t('tweets'); ?></span>
         </div>
     </div>
 
@@ -91,7 +91,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
         <?php echo $form->label('refresh_interval', t('Refresh every'))?>
         <div class="input-group col-xs-4">
             <?php echo $form->text('refresh_interval', $refresh_interval); ?>
-            <span class="input-group-addon">minutes</span>
+            <span class="input-group-addon"><?php echo t('minutes'); ?></span>
         </div>
     </div>
 </div>

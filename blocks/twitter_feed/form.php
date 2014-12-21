@@ -14,9 +14,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#general" aria-controls="general" role="tab" data-toggle="tab">General</a></li>
-            <li role="presentation"><a href="#appearance" aria-controls="appearance" role="tab" data-toggle="tab">Appearance</a></li>
-            <li role="presentation"><a href="#accounts" aria-controls="accounts" role="tab" data-toggle="tab">Accounts</a></li>
+            <li role="presentation" class="active"><a href="#general" aria-controls="general" role="tab" data-toggle="tab"><?php echo t('General'); ?></a></li>
+            <li role="presentation"><a href="#appearance" aria-controls="appearance" role="tab" data-toggle="tab"><?php echo t('Appearance'); ?></a></li>
+            <li role="presentation"><a href="#accounts" aria-controls="accounts" role="tab" data-toggle="tab"><?php echo t('Accounts'); ?></a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -27,8 +27,8 @@ defined('C5_EXECUTE') or die('Access Denied.');
             <?php $this->inc('form-accounts.php'); ?>
 
             <div role="tabpanel" class="tab-pane text-center" id="firstRun">
-                <p>To get started you need authorize your first twitter account.</p>
-                <a href="javascript:void(0)" id="addFirstAccount" class="btn btn-success btn-lg">Add account</a>
+                <p><?php echo t('To get started you need authorize your first twitter account.'); ?></p>
+                <a href="javascript:void(0)" id="addFirstAccount" class="btn btn-success btn-lg"><?php echo t('Add account'); ?></a>
             </div>
 
         </div>

@@ -252,6 +252,22 @@ class Controller extends BlockController
     }
 
     /**
+     * Javascript Translation strings
+     * 
+     * @return array
+     */
+    public function getJavaScriptStrings() {
+        return array(
+            'confirm-account-removal-no-dependents' => t('Are you sure you want to remove this account?'),
+            'confirm-account-removal-dependents' => t('This account has {{ num_blocks }} block(s) using it, are you sure you want to remove it?'),
+            'view-profile-button' => t('View Profile'),
+            'remove-account-button' => t('Remove'),
+            'no-accounts-message' => t('No accounts authorized'),
+            'search-control-placeholder' => t('your search term'),
+        );
+    }
+
+    /**
      * Add Form Hook
      *
      * @return  void
@@ -305,10 +321,10 @@ class Controller extends BlockController
         $this->set('account_list', $account_list);
 
         $type_list = array(
-            'user' => 'User',
-            'hashtag' => 'Hashtag',
-            'list' => 'List',
-            'search' => 'Search',
+            'user' => t('User'),
+            'hashtag' => t('Hashtag'),
+            'list' => t('List'),
+            'search' => t('Search'),
         );
 
         $this->set('type_list', $type_list);

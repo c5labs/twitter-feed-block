@@ -63,11 +63,11 @@ if ($show_avatars) {
     </ul>
 
     <?php } else { ?>
-        <div class="tf-no-tweets-found">No tweets found.</div>
+        <div class="tf-no-tweets-found"><?php echo t('No tweets found.'); ?></div>
     <?php } ?>
 
 <?php } elseif ($c->isEditMode()) { ?>
-    <div class="ccm-edit-mode-disabled-item">In-Active Twitter Feed Block.</div>
+    <div class="ccm-edit-mode-disabled-item"><?php echo t('In-Active Twitter Feed Block.'); ?></div>
 <?php } ?>
 
 </div>

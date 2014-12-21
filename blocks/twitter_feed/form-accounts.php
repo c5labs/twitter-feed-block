@@ -13,17 +13,17 @@ defined('C5_EXECUTE') or die('Access Denied.');
     <div class="row">
         <div class="col-xs-9">
             <p>
-                The accounts listed below are have been authorized with twitter.
+                <?php echo t('The accounts listed below are have been authorized with twitter.'); ?>
             </p>
         </div>
         <div class="col-xs-3 text-right">
-            <a href="javascript:void(0)" id="addAccount" class="btn btn-default">Add account</a>
+            <a href="javascript:void(0)" id="addAccount" class="btn btn-default"><?php echo t('Add account'); ?></a>
         </div>
     </div>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Account</th>
+                <th><?php echo t('Account'); ?></th>
                 <th></th>
             </tr>
         </thead>
@@ -33,30 +33,30 @@ defined('C5_EXECUTE') or die('Access Denied.');
             <tr data-account-id="<?php echo $account['acID']; ?>" data-account-handle="<?php echo $account['twitter_handle']; ?>" data-dependent-blocks="<?php echo $account['dependent_blocks']; ?>">
                 <td>@<?php echo $account['twitter_handle']; ?></td>
                 <td class="text-right">
-                    <a href="javascript:void(0);" class="btn btn-sm btn-default profile-btn">View Profile</a>
-                    <a href="javascript:void(0);" class="btn btn-sm btn-danger remove-btn">Remove</a>
+                    <a href="javascript:void(0);" class="btn btn-sm btn-default profile-btn"><?php echo t('View Profile'); ?></a>
+                    <a href="javascript:void(0);" class="btn btn-sm btn-danger remove-btn"><?php echo t('Remove'); ?></a>
                 </td>
             </tr>
             <?php } ?>
             <?php } else { ?>
             <tr id="noAccountsRow">
-                <td colspan="2">No accounts authorized.</td>
+                <td colspan="2"><?php echo t('No accounts authorized.'); ?></td>
             </tr>
             <?php } ?>
         </tbody>
     </table>
     <div class="alert alert-info" role="alert">
-        These accounts are <strong>global</strong>, this means they are available in any Twitter Feed block on your site, changes to these accounts here will <strong>affect all other blocks</strong>.
+        <?php echo t('These accounts are <strong>global</strong>, this means they are available in any Twitter Feed block on your site, changes to these accounts here will <strong>affect all other blocks</strong>.'); ?>
     </div>
 </div>
 
 <!-- Authorizing Screen !-->
 <div role="tabpanel" class="tab-pane text-center" id="authorizing">
-    <img src="<?php echo $this->getBlockUrl(); ?>/load_icon.gif" alt="Authorizing...">
-    <h2>Authorizing Account</h2>
+    <img src="<?php echo $this->getBlockUrl(); ?>/load_icon.gif" alt="<?php echo t('Authorizing Account'); ?>">
+    <h2><?php echo t('Authorizing Account'); ?></h2>
     <p>
-        <a href="javascript:void(0)" class="btn btn-default" id="retryBtn">Re-try Authorization</a>
-        <a href="javascript:void(0)" id="cancelBtn">or cancel</a>
+        <a href="javascript:void(0)" class="btn btn-default" id="retryBtn"><?php echo t('Re-try Authorization'); ?></a>
+        <a href="javascript:void(0)" id="cancelBtn"><?php echo t('or cancel'); ?></a>
     </p>
 </div>
 
@@ -80,11 +80,11 @@ defined('C5_EXECUTE') or die('Access Denied.');
         function removeButtonHander(e)
         {
             var $row = $(this).parent().parent(),
-            msg = 'Are you sure you want to remove this account?',
+            msg = ccm_t('confirm-account-removal-no-dependents'),
             dependent_blocks = $(this).parent().parent().data('dependent-blocks');
 
             if (dependent_blocks > 0) {
-                msg = 'This account has ' + dependent_blocks + ' block(s) using it, are you sure you want to remove it?';
+                msg = ccm_t('confirm-account-removal-dependents').replace('{{ num_blocks }}', dependent_blocks);
             }
 
             if (confirm(msg)) {
@@ -152,8 +152,8 @@ defined('C5_EXECUTE') or die('Access Denied.');
             $tr = $('<tr></tr>').attr('data-account-id', acID).attr('data-account-handle', handle),
             $handleCol = $('<td></td>').html('@' + handle),
             $buttonCol = $('<td></td>').addClass('text-right'),
-            $profileButton = $('<a href="javascript:void(0);" class="btn btn-sm btn-default profile-btn">View Profile</a>'),
-            $removeButton = $('<a href="javascript:void(0);" class="btn btn-sm btn-danger remove-btn">Remove</a>');
+            $profileButton = $('<a href="javascript:void(0);" class="btn btn-sm btn-default profile-btn">' + ccm_t('view-profile-button') + '</a>'),
+            $removeButton = $('<a href="javascript:void(0);" class="btn btn-sm btn-danger remove-btn">' + ccm_t('remove-account-button') + '</a>');
 
             $profileButton.click(profileButtonHandler);
             $removeButton.click(removeButtonHander);
@@ -166,7 +166,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
         {
             var $row = $('#accounts tr[data-account-id=' + acID + ']');
             if (0 === $row.siblings().length) {
-                $row.after($('<tr id="noAccountsRow"><td colspan="2">No accounts authorized</td></tr>'));
+                $row.after($('<tr id="noAccountsRow"><td colspan="2">' + ccm_t('no-accounts-message') + '</td></tr>'));
                 applyFirstRun(); // @see form.php
             }
             $row.remove();
