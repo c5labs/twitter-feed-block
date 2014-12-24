@@ -41,8 +41,10 @@ defined('C5_EXECUTE') or die('Access Denied.');
 </div>
 <script>
     $(function () {
-        $('input[type="checkbox"]').each(function () {
-            var init = new Switchery(this, { size: 'small' });
-        });
+        setTimeout(function () {
+            $('#appearance input[type="checkbox"]').each(function () {
+                var init = new Switchery(this, { size: 'small' });
+            });
+        }, 1000);
     });
 </script>
