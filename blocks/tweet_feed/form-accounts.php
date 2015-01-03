@@ -11,12 +11,12 @@ defined('C5_EXECUTE') or die('Access Denied.');
 ?>
 <div role="tabpanel" class="tab-pane" id="tfAccounts">
     <div class="row">
-        <div class="col-xs-9">
+        <div class="col-xs-8">
             <p>
                 <?php echo t('The accounts listed below are have been authorized with twitter.'); ?>
             </p>
         </div>
-        <div class="col-xs-3 text-right">
+        <div class="col-xs-4 text-right">
             <a href="javascript:void(0)" id="tfAddAccount" class="btn btn-default"><?php echo t('Add account'); ?></a>
         </div>
     </div>
