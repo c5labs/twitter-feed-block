@@ -46,7 +46,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
         </tbody>
     </table>
     <div class="alert alert-info" role="alert">
-        <?php echo t('These accounts are <strong>global</strong>, this means they are available in any Twitter Feed block on your site, changes to these accounts here will <strong>affect all other blocks</strong>.'); ?>
+        <?php echo t('These accounts are <strong>global</strong>, this means they are available in any Twitter Feed block on your site, changes to the accounts here will <strong>affect all other blocks</strong>.'); ?>
     </div>
 </div>
 
