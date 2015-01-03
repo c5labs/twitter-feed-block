@@ -1,8 +1,7 @@
-<?php defined('C5_EXECUTE') or die('Access Denied.'); ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo t('Redirecting to Twitter...'); ?></title>
+    <title>{{ page_title }}</title>
     <style>
         html,
         body {
@@ -46,17 +45,10 @@
 <body>
     <div class='outer'>
         <div id="message">
-            <img src="{{ logo_url }}" alt="Twitter Feed">
-            <h1><?php echo t('Standby, sending you to twitter...'); ?></h1>
-            <p><?php echo t('If you are not automatically redirected to twitter, <a href="{{ url }}">click here</a>.'); ?></p>
+            <img src="{{ logo_url }}" alt="Tweet Feed">
+            <h1>{{ page_header }}</h1>
+            <p>{{ page_content }}</p>
         </div>
     </div>
-    <script>
-        window.TwitterFeedOAuthToken = "{{ token }}";
-
-        window.onload = function () {
-            setTimeout(function () { window.location = '{{ url }}'; }, 2000);
-        };
-    </script>
 </body>
 </html>

@@ -158,10 +158,7 @@ class TwitterFeedRequestHandler
      */
     protected function compileFromFile($file, $data)
     {
-        ob_start();
-        include($file);
-        $html = ob_get_contents();
-        ob_end_clean();
+        $html = file_get_contents($file);
         return $this->compile($html, $data);
     }
 
@@ -183,10 +180,14 @@ class TwitterFeedRequestHandler
             $data,
             array(
                 'error' => $ex->getMessage(),
-                'logo_url' => $this->package->getRelativePath() . '/icon.png'
+                'logo_url' => $this->package->getRelativePath() . '/icon.png',
+                'page_title' => t('Authorization Error'),
+                'page_heading' => t('Oh No! We had a problem.'),
+                'error_list_header' => t('It looks like something went wrong, the error returned was:'),
+                'error_list_footer' => t('Waiting a little while and trying again <i>may</i> fix the problem, we\'ve logged more information to the system error log.'),
             )
         );
-        $html = $this->compileFromFile(__DIR__ . '/../templates/error.template.php', $template_data);
+        $html = $this->compileFromFile(__DIR__ . '/../templates/error.template.html', $template_data);
         header("HTTP/1.0 500 Server Error", true, 500);
         die($html);
     }
@@ -213,9 +214,12 @@ class TwitterFeedRequestHandler
         $template_data = array(
             'token' => $data['oauth_token'],
             'url' => $data['url'],
-            'logo_url' => $this->package->getRelativePath() . '/icon.png'
+            'logo_url' => $this->package->getRelativePath() . '/icon.png',
+            'page_title' => t('Redirecting to Twitter...'),
+            'page_header' => t('Standby, sending you to twitter...'),
+            'page_content' => t('If you are not automatically redirected to twitter, ') . '<a href="' . $data['url'] . '">' . t('click here') . '</a>.'
         );
-        $html = $this->compileFromFile(__DIR__ . '/../templates/redirect.template.php', $template_data);
+        $html = $this->compileFromFile(__DIR__ . '/../templates/redirect.template.html', $template_data);
         die($html);
     }
 
@@ -254,9 +258,12 @@ class TwitterFeedRequestHandler
 
         $template_data = array(
             'twitter_handle' => $response['screen_name'],
-            'logo_url' => $this->package->getRelativePath() . '/icon.png'
+            'logo_url' => $this->package->getRelativePath() . '/icon.png',
+            'page_title' => t('Account Authorized'),
+            'page_header' => '@' . $response['screen_name'] . t(' has been authorized!'),
+            'page_content' => t('You can close this window and head back to your site, have a nice day!')
         );
-        $html = $this->compileFromFile(__DIR__ . '/../templates/authorized.template.php', $template_data);
+        $html = $this->compileFromFile(__DIR__ . '/../templates/authorized.template.html', $template_data);
         die($html);
     }
 

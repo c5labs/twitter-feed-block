@@ -1,8 +1,7 @@
-<?php defined('C5_EXECUTE') or die('Access Denied.'); ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo t('Authorization Error'); ?></title>
+    <title>{{ page_title }}</title>
     <style>
         html,
         body {
@@ -52,11 +51,11 @@
 <body>
     <div class='outer'>
         <div id="message">
-            <img src="{{ logo_url }}" alt="Twitter Feed">
-            <h1><?php echo t('Oh No! We had a problem.'); ?></h1>
-            <p><?php echo t('It looks like something went wrong, the error returned was:'); ?></p>
+            <img src="{{ logo_url }}" alt="Tweet Feed">
+            <h1>{{ page_heading }}</h1>
+            <p>{{ error_list_header }}</p>
             <p class="error">{{ error }}</p>
-            <p><?php echo t('Waiting a little while and trying again <i>may</i> fix the problem, we\'ve logged more information to the system error log.'); ?></p>
+            <p>{{ error_list_footer }}</p>
         </div>
     </div>
 </body>
