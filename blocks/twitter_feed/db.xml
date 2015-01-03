@@ -8,7 +8,7 @@
         <field name="refresh_interval" type="I">
             <unsigned />
             <notnull />
-            <default value="300" />
+            <default value="30" />
         </field>
         <field name="num_tweets" type="I">
             <unsigned />

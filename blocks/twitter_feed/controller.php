@@ -229,6 +229,7 @@ class Controller extends BlockController
      */
     public function save($args = array())
     {
+        $args['refresh_interval'] = (intval($args['refresh_interval']) < 3) ? '3' : $args['refresh_interval'];
         $args['use_accounts'] = json_encode($args['use_accounts']);
 
         $checkboxes = array(
@@ -284,7 +285,7 @@ class Controller extends BlockController
         $this->set('show_avatars', '1');
         $this->set('show_authors', '1');
         $this->set('num_tweets', '5');
-        $this->set('refresh_interval', '5');
+        $this->set('refresh_interval', '30');
         $this->set('show_tweets_from', 'concrete5');
         $this->set('show_tweets_type', 'statuses/user_timeline');
         $this->form();
