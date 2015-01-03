@@ -4,28 +4,28 @@
  *
  * PHP version 5.3
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk
  */
-namespace Concrete\Package\TwitterFeedPackage;
+namespace Concrete\Package\TweetFeedPackage;
 
 use Database;
 use Package;
 use BlockType;
 use Asset;
 use AssetList;
-use Concrete\Package\TwitterFeedPackage\Src\TwitterFeedRequestHandler;
-use Concrete\Package\TwitterFeedPackage\Src\TwitterFeedService;
-use Concrete\Package\TwitterFeedPackage\Src\AuthorizedAccountRepository;
+use Concrete\Package\TweetFeedPackage\Src\TwitterFeedRequestHandler;
+use Concrete\Package\TweetFeedPackage\Src\TwitterFeedService;
+use Concrete\Package\TweetFeedPackage\Src\AuthorizedAccountRepository;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
 /**
  * Package Controller Class
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk
@@ -37,7 +37,7 @@ class Controller extends Package
      *
      * @var string
      */
-    protected $pkgHandle = 'twitter_feed_package';
+    protected $pkgHandle = 'tweet_feed_package';
 
     /**
      * Application Version Required
@@ -51,7 +51,7 @@ class Controller extends Package
      *
      * @var string
      */
-    protected $pkgVersion = '0.9.6';
+    protected $pkgVersion = '0.9.7';
 
     /**
      * Twitter oAuth Consumer Key
@@ -77,7 +77,7 @@ class Controller extends Package
      */
     public function getPackageName()
     {
-        return t("Twitter Feed Block Components");
+        return t("Tweet Feed Block Components");
     }
 
     /**
@@ -131,7 +131,7 @@ class Controller extends Package
     public function install()
     {
         $pkg = parent::install();
-        $bt = BlockType::installBlockTypeFromPackage('twitter_feed', $pkg);
+        $bt = BlockType::installBlockTypeFromPackage('tweet_feed', $pkg);
     }
 
     /**
@@ -210,7 +210,7 @@ class Controller extends Package
         $al->register(
             'css',
             'twitterfeed/form',
-            'blocks/twitter_feed/css/forms/form.css',
+            'blocks/tweet_feed/css/forms/form.css',
             array(
                 'version' => '0.9.5',
                 'position' => Asset::ASSET_POSITION_HEADER,

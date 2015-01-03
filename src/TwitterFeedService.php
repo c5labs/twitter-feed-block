@@ -4,14 +4,14 @@
  *
  * PHP version 5.3
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk
  */
-namespace Concrete\Package\TwitterFeedPackage\Src;
+namespace Concrete\Package\TweetFeedPackage\Src;
 
-use Concrete\Package\TwitterFeedPackage\Src\TwitterOAuth;
+use Concrete\Package\TweetFeedPackage\Src\TwitterOAuth;
 use Exception;
 use Log;
 use Core;
@@ -25,7 +25,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * using the TwitterOAuth library. All calls to twitter pass through this class,
  * it also deals with the caching.
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk

@@ -4,12 +4,12 @@
  *
  * PHP version 5.3
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk
  */
-namespace Concrete\Package\TwitterFeedPackage\Src;
+namespace Concrete\Package\TweetFeedPackage\Src;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
@@ -20,7 +20,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * pattern which abstracts all dealings with the account
  * authorization table to this file.
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk

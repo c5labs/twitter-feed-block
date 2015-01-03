@@ -4,12 +4,12 @@
  *
  * PHP version 5.3
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk
  */
-namespace Concrete\Package\TwitterFeedPackage\Src;
+namespace Concrete\Package\TweetFeedPackage\Src;
 
 use Core;
 use Carbon\Carbon;
@@ -25,7 +25,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * If you aren't familiar with tweet entities you may find this link useful:
  * https://dev.twitter.com/overview/api/entities-in-twitter-objects
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk

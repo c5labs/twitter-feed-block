@@ -4,28 +4,28 @@
  *
  * PHP version 5.3
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk
  */
-namespace Concrete\Package\TwitterFeedPackage\Block\TwitterFeed;
+namespace Concrete\Package\TweetFeedPackage\Block\TweetFeed;
 
 use Core;
 use Database;
 use BlockType;
 use Package;
 use Concrete\Core\Block\BlockController;
-use Concrete\Package\TwitterFeedPackage\Src\AuthorizedAccountRepository;
-use Concrete\Package\TwitterFeedPackage\Src\TwitterFeedService;
-use Concrete\Package\TwitterFeedPackage\Src\TwitterFeedFormatter;
+use Concrete\Package\TweetFeedPackage\Src\AuthorizedAccountRepository;
+use Concrete\Package\TweetFeedPackage\Src\TwitterFeedService;
+use Concrete\Package\TweetFeedPackage\Src\TwitterFeedFormatter;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
 /**
  * Block Controller Class
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk
@@ -124,7 +124,7 @@ class Controller extends BlockController
      */
     public function getBlockTypeName()
     {
-        return t("Twitter Feed");
+        return t("Tweet Feed");
     }
 
     /**
@@ -134,7 +134,7 @@ class Controller extends BlockController
      */
     public function getBlockTypeDescription()
     {
-        return t("Displays a list of users latest tweets.");
+        return t("Displays a list of users, hash tags, lists or searches latest tweets.");
     }
 
     /**

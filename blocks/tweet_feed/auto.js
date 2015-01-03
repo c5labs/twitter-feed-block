@@ -1,7 +1,7 @@
 /**
 * Block Editor / Form Javascript File
 *
-* @package  TwitterFeedPackage
+* @package  TweetFeedPackage
 * @author   Oliver Green <green2go@gmail.com>
 * @license  http://www.gnu.org/copyleft/gpl.html GPL3
 * @link     http://codeblog.co.uk
@@ -13,7 +13,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
     /**
      * General functions used on all editor tabs
      *
-     * @package  TwitterFeedPackage
+     * @package  TweetFeedPackage
      * @author   Oliver Green <green2go@gmail.com>
      * @license  http://www.gnu.org/copyleft/gpl.html GPL3
      * @link     http://codeblog.co.uk
@@ -150,7 +150,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
     /**
      * Account Tab Specific
      *
-     * @package  TwitterFeedPackage
+     * @package  TweetFeedPackage
      * @author   Oliver Green <green2go@gmail.com>
      * @license  http://www.gnu.org/copyleft/gpl.html GPL3
      * @link     http://codeblog.co.uk

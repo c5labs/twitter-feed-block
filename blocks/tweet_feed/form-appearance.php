@@ -3,7 +3,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
 /**
  * Appearance Form Tab
  *
- * @package  TwitterFeedPackage
+ * @package  TweetFeedPackage
  * @author   Oliver Green <green2go@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     http://codeblog.co.uk
