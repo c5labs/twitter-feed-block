@@ -57,8 +57,8 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
     {
         $('#tfFormContainer .nav-tabs a:last').tab('show');
         $('#tfFormContainer .nav-tabs a').removeAttr('data-toggle').parent().addClass('disabled');
-        $('#accounts').removeClass('active');
-        $('#firstRun').addClass('active');
+        $('#tfAccounts').removeClass('active');
+        $('#tfFirstRun').addClass('active');
     }
     expose.applyFirstRun = applyFirstRun;
 
@@ -166,7 +166,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
         var handle = $(this).parent().parent().data('account-handle');
         window.open('https://twitter.com/' + handle);
     }
-    $('.profile-btn').click(profileButtonHandler);
+    $('#tfAccounts .profile-btn').click(profileButtonHandler);
 
     /**
      * Account remove button click
@@ -200,7 +200,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
             e.preventDefault();
         }
     }
-    $('.remove-btn').click(removeButtonHander);
+    $('#tfAccounts .remove-btn').click(removeButtonHander);
 
     /**
      * Adds a user account to the UI
@@ -209,7 +209,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      */    
     function addEntry(acID, handle)
     {
-        var $tbody = $('#accounts table tbody'),
+        var $tbody = $('#tfAccounts table tbody'),
         $tr = $('<tr></tr>').attr('data-account-id', acID).attr('data-account-handle', handle),
         $handleCol = $('<td></td>').html('@' + handle),
         $buttonCol = $('<td></td>').addClass('text-right'),
@@ -220,7 +220,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
         $removeButton.click(removeButtonHander);
 
         $tbody.append($tr.append($handleCol, $buttonCol.append($profileButton, " ", $removeButton)));
-        $('#noAccountsRow').remove();
+        $('#tfNoAccountsRow').remove();
     }
 
     /**
@@ -230,9 +230,9 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      */  
     function removeEntry(acID)
     {
-        var $row = $('#accounts tr[data-account-id=' + acID + ']');
+        var $row = $('#tfAccounts tr[data-account-id=' + acID + ']');
         if (0 === $row.siblings().length) {
-            $row.after($('<tr id="noAccountsRow"><td colspan="2">' + ccm_t('no-accounts-message') + '</td></tr>'));
+            $row.after($('<tr id="tfNoAccountsRow"><td colspan="2">' + ccm_t('no-accounts-message') + '</td></tr>'));
             applyFirstRun(); // @see form.php
         }
         $row.remove();
@@ -264,7 +264,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      * 
      * @return {void}
      */  
-    $('#addAccount, #retryBtn, #addFirstAccount').click(function () {
+    $('#tfAddAccount, #tfRetryBtn, #tfAddFirstAccount').click(function () {
         openOAuthWindow();
         showAuthorizingScreen();
         startPolling();
@@ -275,7 +275,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      * 
      * @return {void}
      */
-    $('#cancelBtn').click(function () {
+    $('#tfCancelBtn').click(function () {
         hideAuthorizingScreen();
         stopPoll();
     });
@@ -288,12 +288,12 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      */
     function showAuthorizingScreen()
     {
-        $('#authorizing').addClass('active');
+        $('#tfAuthorizing').addClass('active');
 
         if ($('#tfFormContainer').hasClass('tf-first-run')) {
-            $('#firstRun').removeClass('active');
+            $('#tfFirstRun').removeClass('active');
         } else {
-            $('#accounts').removeClass('active');
+            $('#tfAccounts').removeClass('active');
         }
     }
 
@@ -304,13 +304,13 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      */
     function hideAuthorizingScreen(accountAdded)
     {
-        $('#authorizing').removeClass('active');
+        $('#tfAuthorizing').removeClass('active');
 
         if ($('#tfFormContainer').hasClass('tf-first-run') && !accountAdded) {
-            $('#firstRun').addClass('active');
+            $('#tfFirstRun').addClass('active');
         } else {
-            $('#firstRun').removeClass('active');
-            $('#accounts').addClass('active');
+            $('#tfFirstRun').removeClass('active');
+            $('#tfAccounts').addClass('active');
             removeFirstRun(); // @see form.php
         }
     }

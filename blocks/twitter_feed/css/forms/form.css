@@ -14,27 +14,27 @@
     outline: 0;
 }
 
-#firstRun {
+#tfFirstRun {
     padding-top: 20%;
 }
 
 /**
  * Accounts
  */
-#accounts .row {
+#tfAccounts .row {
     margin-top: 20px;
 }
 
-#accounts table td {
+#tfAccounts table td {
     vertical-align: middle;
 }
 
-#authorizing img {
+#tfAuthorizing img {
     margin-top: 50px;
     margin-bottom: 20px;
 }
 
-#authorizing h2 {
+#tfAuthorizing h2 {
     font-size: 26px;
     margin-bottom: 25px;
 }
@@ -42,15 +42,15 @@
 /**
  * Appearance
  */
-#appearance {
+#tfAppearance {
     margin-top: 20px;
 }
 
-#appearance table td {
+#tfAppearance table td {
     vertical-align: middle;
 }
 
-#appearance table td label {
+#tfAppearance table td label {
     margin-bottom: 0;
     padding-bottom: 0;
 }
@@ -58,6 +58,6 @@
 /**
  * General
  */
-#general {
+#tfGeneral {
     margin-top: 20px;
 }

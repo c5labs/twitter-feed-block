@@ -9,7 +9,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * @link     http://codeblog.co.uk
  */
 ?>
-<div role="tabpanel" class="tab-pane" id="accounts">
+<div role="tabpanel" class="tab-pane" id="tfAccounts">
     <div class="row">
         <div class="col-xs-9">
             <p>
@@ -17,7 +17,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
             </p>
         </div>
         <div class="col-xs-3 text-right">
-            <a href="javascript:void(0)" id="addAccount" class="btn btn-default"><?php echo t('Add account'); ?></a>
+            <a href="javascript:void(0)" id="tfAddAccount" class="btn btn-default"><?php echo t('Add account'); ?></a>
         </div>
     </div>
     <table class="table table-striped">
@@ -39,7 +39,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
             </tr>
             <?php } ?>
             <?php } else { ?>
-            <tr id="noAccountsRow">
+            <tr id="tfNoAccountsRow">
                 <td colspan="2"><?php echo t('No accounts authorized.'); ?></td>
             </tr>
             <?php } ?>
@@ -51,11 +51,11 @@ defined('C5_EXECUTE') or die('Access Denied.');
 </div>
 
 <!-- Authorizing Screen !-->
-<div role="tabpanel" class="tab-pane text-center" id="authorizing">
+<div role="tabpanel" class="tab-pane text-center" id="tfAuthorizing">
     <img src="<?php echo $this->getBlockUrl(); ?>/load_icon.gif" alt="<?php echo t('Authorizing Account'); ?>">
     <h2><?php echo t('Authorizing Account'); ?></h2>
     <p>
-        <a href="javascript:void(0)" class="btn btn-default" id="retryBtn"><?php echo t('Re-try Authorization'); ?></a>
-        <a href="javascript:void(0)" id="cancelBtn"><?php echo t('or cancel'); ?></a>
+        <a href="javascript:void(0)" class="btn btn-default" id="tfRetryBtn"><?php echo t('Re-try Authorization'); ?></a>
+        <a href="javascript:void(0)" id="tfCancelBtn"><?php echo t('or cancel'); ?></a>
     </p>
 </div>

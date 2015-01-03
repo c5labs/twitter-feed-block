@@ -9,7 +9,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * @link     http://codeblog.co.uk
  */
 ?>
-<div role="tabpanel" class="tab-pane" id="appearance">
+<div role="tabpanel" class="tab-pane" id="tfAppearance">
     
     <table class="table table-striped">
         <tr>

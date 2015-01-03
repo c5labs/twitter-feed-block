@@ -9,7 +9,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * @link     http://codeblog.co.uk
  */
 ?>
-<div role="tabpanel" class="tab-pane active" id="general">
+<div role="tabpanel" class="tab-pane active" id="tfGeneral">
 
     <div class="form-group" <?php if(count($account_list) <= 1) { ?>style="display: none;"<?php } ?>>
         <?php echo $form->label('use_account', t('Use account'))?>
