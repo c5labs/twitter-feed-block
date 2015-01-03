@@ -42,7 +42,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
 <script>
     $(function () {
         setTimeout(function () {
-            $('#appearance input[type="checkbox"]').each(function () {
+            $('#tfAppearance input[type="checkbox"]').each(function () {
                 var init = new Switchery(this, { size: 'small' });
             });
         }, 1000);
