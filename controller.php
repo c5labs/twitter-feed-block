@@ -51,7 +51,7 @@ class Controller extends Package
      *
      * @var string
      */
-    protected $pkgVersion = '0.9.7';
+    protected $pkgVersion = '0.9.8';
 
     /**
      * Twitter oAuth Consumer Key
