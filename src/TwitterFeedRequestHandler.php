@@ -202,7 +202,7 @@ class TwitterFeedRequestHandler
         // 5.7.4.X fix
         $version = explode('.', APP_VERSION);
         if ($version[2] < 4) {
-            $callback_url = BASE_URL . Concrete\Core\Routing\URL::to('/twitter-feed-package/callback');
+            $callback_url = BASE_URL . \Concrete\Core\Routing\URL::to('/twitter-feed-package/callback');
         } else {
             $callback_url = \URL::to('/twitter-feed-package/callback')->__toString();
         }
