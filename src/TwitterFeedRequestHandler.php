@@ -15,7 +15,6 @@ use Core;
 use Route;
 use Database;
 use Exception;
-use Concrete\Core\Routing\URL;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
@@ -200,7 +199,14 @@ class TwitterFeedRequestHandler
      */
     protected function handleAuthorizationRedirect()
     {
-        $callback_url = BASE_URL . URL::to('/twitter-feed-package/callback');
+        // 5.7.4.X fix
+        $version = explode('.', APP_VERSION);
+        if ($version[2] < 4) {
+            $callback_url = BASE_URL . Concrete\Core\Routing\URL::to('/twitter-feed-package/callback');
+        } else {
+            $callback_url = \URL::to('/twitter-feed-package/callback')->__toString();
+        }
+
         $a = $this->getAuthorizationRepository();
 
         try {
