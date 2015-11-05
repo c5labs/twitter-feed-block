@@ -332,7 +332,6 @@ class TwitterFeedFormatter
 
         if (is_array($args[0])) {
             foreach ($args[0] as $k => $tweet) {
-                //var_dump($tweet);die;
                 $args[0][$k] = $this->format($tweet, $options);
             }
             return $args[0];
@@ -340,20 +339,17 @@ class TwitterFeedFormatter
             $tweet = $args[0];
         }
 
+        // Use the original tweet rather than the retweet for processing
+        if (is_object($tweet->retweeted_status)) {
+            $tweet = $tweet->retweeted_status;
+        }
+
         $expanded_tweet = $this->removeEmoji($this->expand($tweet, $options));
         $tweet->original_text = $tweet_txt;
         $tweet->text = $expanded_tweet;
-
-        // Add the correct profile url
-        if (is_object($tweet->retweeted_status)) {
-            $tweet->avatar_url = $tweet->retweeted_status->user->profile_image_url_https;
-            $tweet->screen_name = '@' . $tweet->retweeted_status->user->screen_name;
-            $tweet->name = $tweet->retweeted_status->user->name;
-        } else {
-            $tweet->avatar_url = $tweet->user->profile_image_url_https;
-            $tweet->screen_name = '@' . $tweet->user->screen_name;
-            $tweet->name = $tweet->user->name;
-        }
+        $tweet->avatar_url = $tweet->user->profile_image_url_https;
+        $tweet->screen_name = '@' . $tweet->user->screen_name;
+        $tweet->name = $tweet->user->name;
 
         if (in_array('date', $options)) {
             $tweet->original_created_at = $tweet->created_at;
