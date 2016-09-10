@@ -2,12 +2,12 @@
 /**
  * Twitter Feed Request Handler File
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
+ * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     http://codeblog.co.uk
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 namespace Concrete\Package\TweetFeedPackage\Src;
 
@@ -26,9 +26,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * requests from the block form.
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
+ * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     http://codeblog.co.uk
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 class TwitterFeedRequestHandler
 {
@@ -201,7 +201,8 @@ class TwitterFeedRequestHandler
     {
         // 5.7.4.X fix
         $version = explode('.', APP_VERSION);
-        if ($version[2] < 4) {
+
+        if (7 === intval($version[1]) && intval($version[2]) < 4) {
             $callback_url = BASE_URL . \Concrete\Core\Routing\URL::to('/twitter-feed-package/callback');
         } else {
             $callback_url = \URL::to('/twitter-feed-package/callback')->__toString();

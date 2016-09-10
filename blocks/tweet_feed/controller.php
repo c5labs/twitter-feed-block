@@ -2,12 +2,12 @@
 /**
  * Block Controller File
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
+ * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     http://codeblog.co.uk
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 namespace Concrete\Package\TweetFeedPackage\Block\TweetFeed;
 
@@ -26,9 +26,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * Block Controller Class
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
+ * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     http://codeblog.co.uk
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 class Controller extends BlockController
 {
@@ -124,7 +124,7 @@ class Controller extends BlockController
      */
     public function getBlockTypeName()
     {
-        return t("Tweet Feed");
+        return t("Twitter Feed");
     }
 
     /**

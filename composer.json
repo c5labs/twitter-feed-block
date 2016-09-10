@@ -1,0 +1,19 @@
+{
+    "name": "olsgreen/concrete-layout-videos",
+    "authors": [
+        {
+            "name": "Oliver Green",
+            "email": "oliver@boxedcode.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/c5devlabs/thanks-for-installing-components.git"
+        }
+    ],
+    "require": {
+        "c5devlabs/thanks-for-installing-components": "dev-master"
+    }
+}

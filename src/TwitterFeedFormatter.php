@@ -2,12 +2,12 @@
 /**
  * Twitter Feed Formatter File
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
+ * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     http://codeblog.co.uk
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 namespace Concrete\Package\TweetFeedPackage\Src;
 
@@ -26,9 +26,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * https://dev.twitter.com/overview/api/entities-in-twitter-objects
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
+ * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     http://codeblog.co.uk
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 class TwitterFeedFormatter
 {
@@ -335,8 +335,13 @@ class TwitterFeedFormatter
                 $args[0][$k] = $this->format($tweet, $options);
             }
             return $args[0];
-        } else {
-            $tweet = $args[0];
+        }
+
+        $tweet = $args[0];
+
+        // Has the tweet already been formated?
+        if (isset($tweet->is_formatted)) {
+            return $tweet;
         }
 
         // Use the original tweet rather than the retweet for processing
@@ -350,6 +355,7 @@ class TwitterFeedFormatter
         $tweet->avatar_url = $tweet->user->profile_image_url_https;
         $tweet->screen_name = '@' . $tweet->user->screen_name;
         $tweet->name = $tweet->user->name;
+        $tweet->is_formatted = true;
 
         if (in_array('date', $options)) {
             $tweet->original_created_at = $tweet->created_at;

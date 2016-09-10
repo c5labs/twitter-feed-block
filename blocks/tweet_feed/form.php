@@ -4,9 +4,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * Block Form
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
+ * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     http://codeblog.co.uk
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 ?>
 <div id="tfFormContainer"<?php if (0 === count($account_list)) {?> class="tf-first-run"<?php } ?>>

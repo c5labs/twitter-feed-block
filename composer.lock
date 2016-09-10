@@ -1,0 +1,57 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "ef8e23082681dc4192a32e998895c7ba",
+    "content-hash": "3ab3ed036f7f8ff01c3243d82ece3a85",
+    "packages": [
+        {
+            "name": "c5devlabs/thanks-for-installing-components",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/c5devlabs/thanks-for-installing-components.git",
+                "reference": "5dd9e81619aabf69bf8814781f6cdd1747e30ed8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/c5devlabs/thanks-for-installing-components/zipball/5dd9e81619aabf69bf8814781f6cdd1747e30ed8",
+                "reference": "5dd9e81619aabf69bf8814781f6cdd1747e30ed8",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "C5dev\\Package\\Thanks\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Green",
+                    "email": "oliver@boxedcode.co.uk"
+                }
+            ],
+            "description": "Post-package install thank you page components.",
+            "support": {
+                "source": "https://github.com/c5devlabs/thanks-for-installing-components/tree/master",
+                "issues": "https://github.com/c5devlabs/thanks-for-installing-components/issues"
+            },
+            "time": "2016-09-10 20:10:26"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "c5devlabs/thanks-for-installing-components": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

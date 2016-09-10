@@ -2,33 +2,38 @@
 /**
  * Package Controller File
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
+ * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     http://codeblog.co.uk
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 namespace Concrete\Package\TweetFeedPackage;
 
-use Database;
-use Package;
-use BlockType;
+defined('C5_EXECUTE') or die('Access Denied.');
+
+/**
+ * Require the packages autoloader
+ */
+require_once __DIR__ . '/vendor/autoload.php';
+
 use Asset;
 use AssetList;
+use BlockType;
+use Concrete\Package\Thanks\Package;
+use Concrete\Package\TweetFeedPackage\Src\AuthorizedAccountRepository;
 use Concrete\Package\TweetFeedPackage\Src\TwitterFeedRequestHandler;
 use Concrete\Package\TweetFeedPackage\Src\TwitterFeedService;
-use Concrete\Package\TweetFeedPackage\Src\AuthorizedAccountRepository;
-
-defined('C5_EXECUTE') or die('Access Denied.');
+use Database;
 
 /**
  * Package Controller Class
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
+ * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     http://codeblog.co.uk
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 class Controller extends Package
 {
@@ -51,7 +56,7 @@ class Controller extends Package
      *
      * @var string
      */
-    protected $pkgVersion = '0.9.13';
+    protected $pkgVersion = '0.9.15';
 
     /**
      * Twitter oAuth Consumer Key
@@ -71,13 +76,20 @@ class Controller extends Package
     protected $twitterConsumerSecret = 'YGqAvTJqE1bIgAOT9ZGHKh00mvyqeaFvWYwtO1ZLe542lf0WZo';
 
     /**
+     * Keep me updated interest ID.
+     * 
+     * @var string
+     */
+    protected $interest_id = 'f1ed077b16';
+
+    /**
      * Package Name
      *
      * @return string
      */
     public function getPackageName()
     {
-        return t("Tweet Feed Block Components");
+        return t("Twitter Feed Block Components");
     }
 
     /**
@@ -121,6 +133,8 @@ class Controller extends Package
 
         /* @todo Should be IOC based */
         $rh = new TwitterFeedRequestHandler($this);
+
+        parent::on_start();
     }
 
     /**
@@ -131,7 +145,10 @@ class Controller extends Package
     public function install()
     {
         $pkg = parent::install();
+
         $bt = BlockType::installBlockTypeFromPackage('tweet_feed', $pkg);
+
+        return $pkg;
     }
 
     /**
@@ -153,8 +170,10 @@ class Controller extends Package
      *
      * @return void
      */
-    protected function registerAssets()
+    public function registerAssets()
     {
+        parent::registerAssets();
+
         $al = AssetList::getInstance();
 
         // Bootstrap Tabs

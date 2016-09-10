@@ -4,9 +4,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * General Form Tab
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
+ * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     http://codeblog.co.uk
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 ?>
 <div role="tabpanel" class="tab-pane active" id="tfGeneral">

@@ -6,11 +6,11 @@
  * we get a better resolution to the issues with using composer 
  * within C5 packages, it will do.
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <green2go@gmail.com>
- * @link     http://codeblog.co.uk
+ * @author   Oliver Green <oliver@c5dev.com>
+ * @link     https://c5dev.com/add-ons/twitter-feed
  */
 namespace Concrete\Package\TweetFeedPackage\Src;
 
