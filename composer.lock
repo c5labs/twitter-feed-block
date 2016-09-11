@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ef8e23082681dc4192a32e998895c7ba",
-    "content-hash": "3ab3ed036f7f8ff01c3243d82ece3a85",
+    "hash": "2f5803881f1aa0aac702a7ca5a73b6a8",
+    "content-hash": "03472534abce4b63c9984c498f284f3d",
     "packages": [
         {
-            "name": "c5devlabs/thanks-for-installing-components",
+            "name": "c5dev/thanks-for-installing-components",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/c5devlabs/thanks-for-installing-components.git",
-                "reference": "5dd9e81619aabf69bf8814781f6cdd1747e30ed8"
+                "url": "https://github.com/c5labs/thanks-for-installing-components.git",
+                "reference": "9327b3c182663e6dccc80ad487b58329db5e0844"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/c5devlabs/thanks-for-installing-components/zipball/5dd9e81619aabf69bf8814781f6cdd1747e30ed8",
-                "reference": "5dd9e81619aabf69bf8814781f6cdd1747e30ed8",
+                "url": "https://api.github.com/repos/c5labs/thanks-for-installing-components/zipball/9327b3c182663e6dccc80ad487b58329db5e0844",
+                "reference": "9327b3c182663e6dccc80ad487b58329db5e0844",
                 "shasum": ""
             },
             "type": "library",
@@ -38,17 +38,17 @@
             ],
             "description": "Post-package install thank you page components.",
             "support": {
-                "source": "https://github.com/c5devlabs/thanks-for-installing-components/tree/master",
-                "issues": "https://github.com/c5devlabs/thanks-for-installing-components/issues"
+                "source": "https://github.com/c5labs/thanks-for-installing-components/tree/master",
+                "issues": "https://github.com/c5labs/thanks-for-installing-components/issues"
             },
-            "time": "2016-09-10 20:10:26"
+            "time": "2016-09-10 23:35:14"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "c5devlabs/thanks-for-installing-components": 20
+        "c5dev/thanks-for-installing-components": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

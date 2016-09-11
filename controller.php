@@ -13,19 +13,15 @@ namespace Concrete\Package\TweetFeedPackage;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
-/**
- * Require the packages autoloader
- */
-require_once __DIR__ . '/vendor/autoload.php';
-
 use Asset;
 use AssetList;
 use BlockType;
-use Concrete\Package\Thanks\Package;
+use Package;
 use Concrete\Package\TweetFeedPackage\Src\AuthorizedAccountRepository;
 use Concrete\Package\TweetFeedPackage\Src\TwitterFeedRequestHandler;
 use Concrete\Package\TweetFeedPackage\Src\TwitterFeedService;
 use Database;
+use Illuminate\Filesystem\Filesystem;
 
 /**
  * Package Controller Class
@@ -80,7 +76,7 @@ class Controller extends Package
      * 
      * @var string
      */
-    protected $interest_id = 'f1ed077b16';
+    public $interest_id = 'f1ed077b16';
 
     /**
      * Package Name
@@ -122,6 +118,17 @@ class Controller extends Package
         return $this->twitterConsumerSecret;
     }
 
+    protected function getServiceInstance($pkg)
+    {
+        if (! class_exists('\C5dev\Package\Thanks\PackageInstallService')) {
+            // Require composer
+            $filesystem = new Filesystem();
+            $filesystem->getRequire(__DIR__ . '/vendor/autoload.php');
+        }
+
+        return new \C5dev\Package\Thanks\PackageInstallService($pkg);
+    }
+
     /**
      * Start-up Hook
      *
@@ -134,7 +141,7 @@ class Controller extends Package
         /* @todo Should be IOC based */
         $rh = new TwitterFeedRequestHandler($this);
 
-        parent::on_start();
+        $this->getServiceInstance($this)->checkForPostInstall();
     }
 
     /**
@@ -147,6 +154,8 @@ class Controller extends Package
         $pkg = parent::install();
 
         $bt = BlockType::installBlockTypeFromPackage('tweet_feed', $pkg);
+
+        $this->getServiceInstance($pkg)->addThanksPage();
 
         return $pkg;
     }
@@ -172,8 +181,6 @@ class Controller extends Package
      */
     public function registerAssets()
     {
-        parent::registerAssets();
-
         $al = AssetList::getInstance();
 
         // Bootstrap Tabs

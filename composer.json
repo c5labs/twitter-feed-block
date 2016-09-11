@@ -1,5 +1,5 @@
 {
-    "name": "olsgreen/concrete-layout-videos",
+    "name": "c5labs/concrete-twitter-feed-block",
     "authors": [
         {
             "name": "Oliver Green",
@@ -10,10 +10,10 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/c5devlabs/thanks-for-installing-components.git"
+            "url": "https://github.com/c5labs/thanks-for-installing-components.git"
         }
     ],
     "require": {
-        "c5devlabs/thanks-for-installing-components": "dev-master"
+        "c5dev/thanks-for-installing-components": "dev-master"
     }
 }
