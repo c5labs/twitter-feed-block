@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/c5labs/thanks-for-installing-components.git",
-                "reference": "9327b3c182663e6dccc80ad487b58329db5e0844"
+                "reference": "2821560f15067a78ac7c5478b1f25d7f503ed029"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/c5labs/thanks-for-installing-components/zipball/9327b3c182663e6dccc80ad487b58329db5e0844",
-                "reference": "9327b3c182663e6dccc80ad487b58329db5e0844",
+                "url": "https://api.github.com/repos/c5labs/thanks-for-installing-components/zipball/2821560f15067a78ac7c5478b1f25d7f503ed029",
+                "reference": "2821560f15067a78ac7c5478b1f25d7f503ed029",
                 "shasum": ""
             },
             "type": "library",
@@ -41,7 +41,7 @@
                 "source": "https://github.com/c5labs/thanks-for-installing-components/tree/master",
                 "issues": "https://github.com/c5labs/thanks-for-installing-components/issues"
             },
-            "time": "2016-09-10 23:35:14"
+            "time": "2016-09-11 15:55:45"
         }
     ],
     "packages-dev": [],
