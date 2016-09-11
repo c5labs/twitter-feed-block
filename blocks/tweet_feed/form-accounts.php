@@ -1,6 +1,6 @@
 <?php
 defined('C5_EXECUTE') or die('Access Denied.');
-/**
+/*
  * Accounts Form Tab
  *
  * @package  TweetFeedPackage
@@ -28,21 +28,35 @@ defined('C5_EXECUTE') or die('Access Denied.');
             </tr>
         </thead>
         <tbody>
-            <?php if (count($accounts) > 0) { ?>
-            <?php foreach ($accounts as $account) { ?>
-            <tr data-account-id="<?php echo $account['acID']; ?>" data-account-handle="<?php echo $account['twitter_handle']; ?>" data-dependent-blocks="<?php echo $account['dependent_blocks']; ?>">
-                <td>@<?php echo $account['twitter_handle']; ?></td>
+            <?php if (count($accounts) > 0) {
+    ?>
+            <?php foreach ($accounts as $account) {
+    ?>
+            <tr data-account-id="<?php echo $account['acID'];
+    ?>" data-account-handle="<?php echo $account['twitter_handle'];
+    ?>" data-dependent-blocks="<?php echo $account['dependent_blocks'];
+    ?>">
+                <td>@<?php echo $account['twitter_handle'];
+    ?></td>
                 <td class="text-right">
-                    <a href="javascript:void(0);" class="btn btn-sm btn-default profile-btn"><?php echo t('View Profile'); ?></a>
-                    <a href="javascript:void(0);" class="btn btn-sm btn-danger remove-btn"><?php echo t('Remove'); ?></a>
+                    <a href="javascript:void(0);" class="btn btn-sm btn-default profile-btn"><?php echo t('View Profile');
+    ?></a>
+                    <a href="javascript:void(0);" class="btn btn-sm btn-danger remove-btn"><?php echo t('Remove');
+    ?></a>
                 </td>
             </tr>
-            <?php } ?>
-            <?php } else { ?>
+            <?php 
+}
+    ?>
+            <?php 
+} else {
+    ?>
             <tr id="tfNoAccountsRow">
-                <td colspan="2"><?php echo t('No accounts authorized.'); ?></td>
+                <td colspan="2"><?php echo t('No accounts authorized.');
+    ?></td>
             </tr>
-            <?php } ?>
+            <?php 
+} ?>
         </tbody>
     </table>
     <div class="alert alert-info" role="alert">

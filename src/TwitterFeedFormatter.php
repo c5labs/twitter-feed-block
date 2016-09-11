@@ -1,23 +1,21 @@
 <?php
 /**
- * Twitter Feed Formatter File
+ * Twitter Feed Formatter File.
  *
  * PHP version 5.4
  *
- * @package  TweetFeedPackage
  * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     https://c5dev.com/add-ons/twitter-feed
  */
 namespace Concrete\Package\TweetFeedPackage\Src;
 
-use Core;
 use Carbon\Carbon;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
 /**
- * Twitter Feed Formatter Class
+ * Twitter Feed Formatter Class.
  *
  * Utility class to expand a tweets entities and also tweak the
  * format the tweet object into more easily usable format.
@@ -25,7 +23,6 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * If you aren't familiar with tweet entities you may find this link useful:
  * https://dev.twitter.com/overview/api/entities-in-twitter-objects
  *
- * @package  TweetFeedPackage
  * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     https://c5dev.com/add-ons/twitter-feed
@@ -33,37 +30,37 @@ defined('C5_EXECUTE') or die('Access Denied.');
 class TwitterFeedFormatter
 {
     /**
-     * CSS Classes for the various entities
+     * CSS Classes for the various entities.
      *
      * @var array
      */
-    protected $entity_css_classes = array(
+    protected $entity_css_classes = [
         'urls' => 'tf-url',
         'user_mentions' => 'tf-mention',
         'hashtags' => 'tf-hashtag',
         'media' => 'tf-media',
-        'symbols' => 'tf-symbol'
-    );
+        'symbols' => 'tf-symbol',
+    ];
 
     /**
-     * Default expansion and format options
+     * Default expansion and format options.
      *
      * Each value corresponds to a tweet
      * entitiy type, except date.
      *
      * @var array
      */
-    protected $default_options = array(
+    protected $default_options = [
         'urls',
         'user_mentions',
         'hashtags',
         'media',
         'symbols',
         'date',
-    );
+    ];
 
     /**
-     * Default formatters
+     * Default formatters.
      *
      * Each entity type has a formatter to apply
      * on expansion, they are held here.
@@ -71,15 +68,15 @@ class TwitterFeedFormatter
      * @see getDefaultFormatters()
      * @var array
      */
-    protected $formatters = array();
+    protected $formatters = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @see getDefaultFormatters()
      * @param array $custom_formatters
      */
-    public function __construct($custom_formatters = array())
+    public function __construct($custom_formatters = [])
     {
         $this->formatters = array_merge(
             $this->getDefaultFormatters(),
@@ -88,7 +85,7 @@ class TwitterFeedFormatter
     }
 
     /**
-     * Sets a custom formatter
+     * Sets a custom formatter.
      *
      * @param string   $entity_type
      * @param callable $formatter
@@ -99,7 +96,7 @@ class TwitterFeedFormatter
     }
 
     /**
-     * Gets the default expansion options
+     * Gets the default expansion options.
      *
      * @return array
      */
@@ -109,7 +106,7 @@ class TwitterFeedFormatter
     }
 
     /**
-     * Sets the default expansion options
+     * Sets the default expansion options.
      *
      * @param array $options
      */
@@ -119,49 +116,50 @@ class TwitterFeedFormatter
     }
 
     /**
-     * Gets the default entity formatters
+     * Gets the default entity formatters.
      *
      * @return array
      */
     protected function getDefaultFormatters()
     {
-        return array(
+        return [
             'urls' => function ($url) {
-                return '<a href="' . $url->expanded_url
-                . '" target="_blank" class="' . $this->entity_css_classes['urls']
-                . '">' . $url->display_url . '</a>';
+                return '<a href="'.$url->expanded_url
+                .'" target="_blank" class="'.$this->entity_css_classes['urls']
+                .'">'.$url->display_url.'</a>';
             },
 
             'user_mentions' => function ($mention) {
-                return '<a href="https://twitter.com/' . $mention->screen_name
-                . '" target="_blank" class="' . $this->entity_css_classes['user_mentions']
-                . '">@' . $mention->screen_name . '</a>';
+                return '<a href="https://twitter.com/'.$mention->screen_name
+                .'" target="_blank" class="'.$this->entity_css_classes['user_mentions']
+                .'">@'.$mention->screen_name.'</a>';
             },
 
             'hashtags' => function ($hash_tag) {
-                return '<a href="https://twitter.com/hashtag/' . $hash_tag->text
-                . '?src=hash" target="_blank" class="' . $this->entity_css_classes['hashtags']
-                . '">#' . $hash_tag->text . '</a>';
+                return '<a href="https://twitter.com/hashtag/'.$hash_tag->text
+                .'?src=hash" target="_blank" class="'.$this->entity_css_classes['hashtags']
+                .'">#'.$hash_tag->text.'</a>';
             },
 
-            'media' => function ($media, $options = array()) {
+            'media' => function ($media, $options = []) {
                 if (in_array('links', $options)) {
-                    return '<a href="' . $media->media_url . '" class="'
-                    . $this->entity_css_classes['media'] . '">' . $media->display_url . '</a>';
+                    return '<a href="'.$media->media_url.'" class="'
+                    .$this->entity_css_classes['media'].'">'.$media->display_url.'</a>';
                 }
-                return '<img src="' . $media->media_url . '" alt="' . $media->display_url
-                . '" class="' . $this->entity_css_classes['media'] . '">';
+
+                return '<img src="'.$media->media_url.'" alt="'.$media->display_url
+                .'" class="'.$this->entity_css_classes['media'].'">';
             },
 
             'symbols' => function ($symbol) {
-                return '<span class="' . $this->entity_css_classes['symbols'] . '">'
-                . $symbol->text .'</strong>';
-            }
-        );
+                return '<span class="'.$this->entity_css_classes['symbols'].'">'
+                .$symbol->text.'</strong>';
+            },
+        ];
     }
 
     /**
-     * Formats a tweet date
+     * Formats a tweet date.
      *
      * @param  string $date
      * @param  string $format [description]
@@ -173,37 +171,42 @@ class TwitterFeedFormatter
         if (method_exists($c, $format)) {
             return $c->$format();
         }
+
         return $c->format($format);
     }
 
     /**
-     * Emoji Remover (until we add support for emojis)
+     * Emoji Remover (until we add support for emojis).
      *
      * @param  string $text
      * @return string
      */
-    protected function removeEmoji($text) {
+    protected function removeEmoji($text)
+    {
         return preg_replace('/[\xF0-\xF7][\x80-\xBF]{3}/', '', $text);
     }
 
     /**
-     * Multi-byte aware string replace function
+     * Multi-byte aware string replace function.
      *
      * @param  string $string
      * @param  string $replacement
-     * @param  integer $start
-     * @param  integer $length
+     * @param  int $start
+     * @param  int $length
      * @return string
      */
     protected function mb_substr_replace($string, $replacement, $start, $length = 0)
     {
-        $str = mb_substr($string, 0, $start) . $replacement;
-        if ($length > 0) $str .= mb_substr($string, $start + $length);
+        $str = mb_substr($string, 0, $start).$replacement;
+        if ($length > 0) {
+            $str .= mb_substr($string, $start + $length);
+        }
+
         return $str;
     }
 
     /**
-     * Gets a formatter for a specific entity type
+     * Gets a formatter for a specific entity type.
      *
      * @see    getDefaultFormatters()
      * @param  string $entity_type
@@ -216,7 +219,7 @@ class TwitterFeedFormatter
 
     /**
      * Compiles the expanded HTML entity strings & extracts
-     * the indices ready for replacement
+     * the indices ready for replacement.
      *
      * @param  array    $entities
      * @param  callable $formatter
@@ -231,18 +234,19 @@ class TwitterFeedFormatter
         array $formatter_opts
     ) {
         foreach ($entities as $obj) {
-            $replacements[] = array(
+            $replacements[] = [
                 's' => $obj->indices[0],
                 'e' => $obj->indices[1],
                 'r' => $formatter($obj, $formatter_opts),
-            );
+            ];
         }
+
         return $replacements;
     }
 
     /**
      * Prepares the entity replacements for each entity type
-     * in the options
+     * in the options.
      *
      * @param  object $tweet
      * @param  array $options
@@ -250,11 +254,10 @@ class TwitterFeedFormatter
      */
     protected function prepareReplacements($tweet, $options)
     {
-        $replacements = array();
+        $replacements = [];
 
         foreach ($options as $k) {
-
-            $formatter_opts = array();
+            $formatter_opts = [];
             if (is_array($k)) {
                 $formatter_opts = array_slice($k, 1);
                 $k = $k[0];
@@ -269,12 +272,13 @@ class TwitterFeedFormatter
                 );
             }
         }
+
         return $replacements;
     }
 
     /**
      * Performs the expansion of the entities on the tweet content
-     * from an array of replacements
+     * from an array of replacements.
      *
      * @param  object $tweet
      * @param  array $replacements
@@ -284,7 +288,7 @@ class TwitterFeedFormatter
     {
         $tweet_txt = $tweet->text;
         usort($replacements, function ($a, $b) {
-            return($b['s']-$a['s']);
+            return($b['s'] - $a['s']);
         });
 
         foreach ($replacements as $i) {
@@ -296,7 +300,7 @@ class TwitterFeedFormatter
 
     /**
      * Expands a tweets entities and returns
-     * the expanded tweet text
+     * the expanded tweet text.
      *
      * @param  object $tweet
      * @param  array $options
@@ -304,16 +308,17 @@ class TwitterFeedFormatter
      */
     public function expand($tweet, $options)
     {
-        if (is_null($options) || !is_array($options)) {
+        if (is_null($options) || ! is_array($options)) {
             $options = $this->default_options;
         }
         $replacements = $this->prepareReplacements($tweet, $options);
+
         return $this->processReplacements($tweet, $replacements);
     }
 
     /**
      * Formats a tweet by expanding the entities, humanizing the
-     * date and peforming tweaks to the object structure
+     * date and peforming tweaks to the object structure.
      *
      * @param  object $tweet | array $tweets
      * @param  array $options
@@ -334,6 +339,7 @@ class TwitterFeedFormatter
             foreach ($args[0] as $k => $tweet) {
                 $args[0][$k] = $this->format($tweet, $options);
             }
+
             return $args[0];
         }
 
@@ -353,7 +359,7 @@ class TwitterFeedFormatter
         $tweet->original_text = $tweet_txt;
         $tweet->text = $expanded_tweet;
         $tweet->avatar_url = $tweet->user->profile_image_url_https;
-        $tweet->screen_name = '@' . $tweet->user->screen_name;
+        $tweet->screen_name = '@'.$tweet->user->screen_name;
         $tweet->name = $tweet->user->name;
         $tweet->is_formatted = true;
 

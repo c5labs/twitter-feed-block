@@ -1,6 +1,6 @@
 <?php
 defined('C5_EXECUTE') or die('Access Denied.');
-/**
+/*
  * General Form Tab
  *
  * @package  TweetFeedPackage
@@ -11,13 +11,15 @@ defined('C5_EXECUTE') or die('Access Denied.');
 ?>
 <div role="tabpanel" class="tab-pane active" id="tfGeneral">
 
-    <div class="form-group" <?php if(count($account_list) <= 1) { ?>style="display: none;"<?php } ?>>
+    <div class="form-group" <?php if (count($account_list) <= 1) {
+    ?>style="display: none;"<?php 
+} ?>>
         <?php echo $form->label('use_account', t('Use account'))?>
         <?php echo $form->select(
             'use_account',
             $account_list,
             $use_account,
-            array('style' => 'border: 1px solid #ccc')
+            ['style' => 'border: 1px solid #ccc']
             ); ?>
         <script>
             $(function () {
@@ -34,7 +36,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
                     'show_tweets_type',
                     $type_list,
                     $show_tweets_type,
-                    array('style' => 'border: 1px solid #ccc')
+                    ['style' => 'border: 1px solid #ccc']
                 ); ?>
             </div>
             <div class="col-xs-6">

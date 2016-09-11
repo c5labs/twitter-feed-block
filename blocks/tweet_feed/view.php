@@ -1,4 +1,4 @@
-<?php defined('C5_EXECUTE') or die("Access Denied.");
+<?php defined('C5_EXECUTE') or die('Access Denied.');
 $c = Page::getCurrentPage();
 
 $tf_class = 'tf-tweets';
@@ -8,66 +8,100 @@ if ($show_avatars) {
 ?>
 <div class="tf-container">
 
-<?php if (isset($error)) { ?>
+<?php if (isset($error)) {
+    ?>
 
     <span class="tf-error">
-        <?php echo t('There was a problem retreving the tweets:'); ?>
+        <?php echo t('There was a problem retreving the tweets:');
+    ?>
         <p class="tf-error-message">
-            <?php echo $error->message; ?>
+            <?php echo $error->message;
+    ?>
         </p>
     </span>
 
-<?php } elseif (is_array($account)) { ?>
+<?php 
+} elseif (is_array($account)) {
+    ?>
 
-    <?php if (count($tweets) > 0) { ?>
+    <?php if (count($tweets) > 0) {
+    ?>
     
-    <ul class="<?php echo $tf_class; ?>">
+    <ul class="<?php echo $tf_class;
+    ?>">
 
-        <?php foreach ($tweets as $tweet) { ?>
+        <?php foreach ($tweets as $tweet) {
+    ?>
         
         <li class="tf-tweet">
 
-            <?php if ($show_authors) { ?>
+            <?php if ($show_authors) {
+    ?>
             <div class="tf-meta">
                 <span class="tf-name">
-                    <?php echo $tweet->name; ?>
+                    <?php echo $tweet->name;
+    ?>
                 </span>
                 <span class="tf-screen-name">
-                    <?php echo $tweet->screen_name; ?>
+                    <?php echo $tweet->screen_name;
+    ?>
                 </span>
             </div>
-            <?php } ?>
+            <?php 
+}
+    ?>
 
             <div class="tf-body">
-                <?php echo $tweet->text; ?>
+                <?php echo $tweet->text;
+    ?>
             </div>
 
             <div class="tf-meta">
-                <?php if ($show_avatars) { ?>
+                <?php if ($show_avatars) {
+    ?>
                 <span class="tf-avatar">
-                    <img src="<?php echo $tweet->avatar_url; ?>" alt="<?php echo $tweet->screen_name; ?>">
+                    <img src="<?php echo $tweet->avatar_url;
+    ?>" alt="<?php echo $tweet->screen_name;
+    ?>">
                 </span>
-                <?php } ?>
+                <?php 
+}
+    ?>
 
-                <?php if ($show_date) { ?>
+                <?php if ($show_date) {
+    ?>
                 <span class="tf-date">
-                    <?php echo $tweet->created_at; ?>
+                    <?php echo $tweet->created_at;
+    ?>
                 </span>
-                <?php } ?>
+                <?php 
+}
+    ?>
             </div>
 
         </li>
         
-        <?php } ?>
+        <?php 
+}
+    ?>
 
     </ul>
 
-    <?php } else { ?>
-        <div class="tf-no-tweets-found"><?php echo t('No tweets found.'); ?></div>
-    <?php } ?>
+    <?php 
+} else {
+    ?>
+        <div class="tf-no-tweets-found"><?php echo t('No tweets found.');
+    ?></div>
+    <?php 
+}
+    ?>
 
-<?php } elseif ($c->isEditMode()) { ?>
-    <div class="ccm-edit-mode-disabled-item"><?php echo t('In-Active Twitter Feed Block.'); ?></div>
-<?php } ?>
+<?php 
+} elseif ($c->isEditMode()) {
+    ?>
+    <div class="ccm-edit-mode-disabled-item"><?php echo t('In-Active Twitter Feed Block.');
+    ?></div>
+<?php 
+} ?>
 
 </div>

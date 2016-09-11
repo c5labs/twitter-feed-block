@@ -1,17 +1,15 @@
 <?php
 /**
- * Twitter Feed Service File
+ * Twitter Feed Service File.
  *
  * PHP version 5.4
  *
- * @package  TweetFeedPackage
  * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     https://c5dev.com/add-ons/twitter-feed
  */
 namespace Concrete\Package\TweetFeedPackage\Src;
 
-use Concrete\Package\TweetFeedPackage\Src\TwitterOAuth;
 use Exception;
 use Log;
 use Core;
@@ -19,13 +17,12 @@ use Core;
 defined('C5_EXECUTE') or die('Access Denied.');
 
 /**
- * Twitter Feed Service Class
+ * Twitter Feed Service Class.
  *
  * Adds a vague level of structure in relation to dealing with the twitter API
  * using the TwitterOAuth library. All calls to twitter pass through this class,
  * it also deals with the caching.
  *
- * @package  TweetFeedPackage
  * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     https://c5dev.com/add-ons/twitter-feed
@@ -33,21 +30,21 @@ defined('C5_EXECUTE') or die('Access Denied.');
 class TwitterFeedService
 {
     /**
-     * Twitter oAuth Consumer Key
+     * Twitter oAuth Consumer Key.
      *
      * @var string
      */
     protected $consumer_key;
 
     /**
-     * Twitter oAuth Consumer Secret
+     * Twitter oAuth Consumer Secret.
      *
      * @var string
      */
     protected $consumer_secret;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $consumer_key
      * @param string $consumer_secret
@@ -61,7 +58,7 @@ class TwitterFeedService
     /**
      * Converts an $http_info object from a TwitterOAuth
      * connection into a string for logging. This is essentially
-     * all information from curl_getinfo();
+     * all information from curl_getinfo();.
      *
      * @param  array  $http_info
      * @return string
@@ -70,13 +67,14 @@ class TwitterFeedService
     {
         $str = '';
         foreach ($http_info as $k => $v) {
-            $str .= $k . ' => ' . $v . "\r\n";
+            $str .= $k.' => '.$v."\r\n";
         }
+
         return $str;
     }
 
     /**
-     * Requests an authorization URL from twitter
+     * Requests an authorization URL from twitter.
      *
      * @param  string $callback_url Redirect URL for after authorization
      * @return array
@@ -97,11 +95,11 @@ class TwitterFeedService
         switch ($connection->http_code) {
             case 200:
                 /* Build authorize URL and redirect user to Twitter. */
-                return array(
+                return [
                     'url' => $connection->getAuthorizeURL($token),
                     'oauth_token' => $token,
-                    'oauth_token_secret' => $token_secret
-                );
+                    'oauth_token_secret' => $token_secret,
+                ];
             default:
                 $this->throwConnectionError($connection);
         }
@@ -141,15 +139,15 @@ class TwitterFeedService
     protected function throwConnectionError($connection)
     {
         /* Save HTTP status for error dialog on connnect page.*/
-        $error = 'Twitter responded with a bad status code (' . $connection->http_code;
-        $error .= (isset($connection->http_info['content']) ? ' - ' . $connection->http_info['content'] : '');
+        $error = 'Twitter responded with a bad status code ('.$connection->http_code;
+        $error .= (isset($connection->http_info['content']) ? ' - '.$connection->http_info['content'] : '');
         $error .= '), please try again.';
-        Log::error($error . " Error detail:\r\n" . $this->httpInfoToString($connection->http_info));
+        Log::error($error." Error detail:\r\n".$this->httpInfoToString($connection->http_info));
         throw new Exception($error);
     }
 
     /**
-     * Gets and sets up an instance of TwitterOAuth
+     * Gets and sets up an instance of TwitterOAuth.
      *
      * @param  array  $account  Contains our access tokens
      * @return TwitterOAuth
@@ -183,7 +181,7 @@ class TwitterFeedService
      *
      * @param  array   $account    Contains our access tokens
      * @param  array   $params     Params sent to twitter
-     * @param  integer $cache_ttl  Time in seconds to cache the request
+     * @param  int $cache_ttl  Time in seconds to cache the request
      * @return array|object
      */
     public function request(array $account, array $params, $cache_ttl = 300)
@@ -200,7 +198,7 @@ class TwitterFeedService
     }
 
     /**
-     * Clears feed cache
+     * Clears feed cache.
      * 
      * @param  array  $account [description]
      * @param  array  $params  [description]

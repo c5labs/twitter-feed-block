@@ -1,6 +1,6 @@
 <?php
 defined('C5_EXECUTE') or die('Access Denied.');
-/**
+/*
  * Block Form
  *
  * @package  TweetFeedPackage
@@ -9,7 +9,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * @link     https://c5dev.com/add-ons/twitter-feed
  */
 ?>
-<div id="tfFormContainer"<?php if (0 === count($account_list)) {?> class="tf-first-run"<?php } ?>>
+<div id="tfFormContainer"<?php if (0 === count($account_list)) {
+    ?> class="tf-first-run"<?php 
+} ?>>
     <div role="tabpanel">
 
         <!-- Nav tabs -->
@@ -39,8 +41,10 @@ defined('C5_EXECUTE') or die('Access Denied.');
         var base_url = "<?php echo View::url('/twitter-feed-package'); ?>",
             csrf_token = "<?php echo Core::make('helper/validation/token')->generate(); ?>",
             tbe = new TwitterFeedBlockEditor(base_url, csrf_token);
-    <?php if (0 === count($account_list)) { ?>
+    <?php if (0 === count($account_list)) {
+    ?>
         tbe.applyFirstRun();
-    <?php } ?>
+    <?php 
+} ?>
     });
 </script>

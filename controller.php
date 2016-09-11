@@ -1,10 +1,9 @@
 <?php
 /**
- * Package Controller File
+ * Package Controller File.
  *
  * PHP version 5.4
  *
- * @package  TweetFeedPackage
  * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     https://c5dev.com/add-ons/twitter-feed
@@ -17,16 +16,13 @@ use Asset;
 use AssetList;
 use BlockType;
 use Package;
-use Concrete\Package\TweetFeedPackage\Src\AuthorizedAccountRepository;
 use Concrete\Package\TweetFeedPackage\Src\TwitterFeedRequestHandler;
-use Concrete\Package\TweetFeedPackage\Src\TwitterFeedService;
 use Database;
 use Illuminate\Filesystem\Filesystem;
 
 /**
- * Package Controller Class
+ * Package Controller Class.
  *
- * @package  TweetFeedPackage
  * @author   Oliver Green <oliver@c5dev.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
  * @link     https://c5dev.com/add-ons/twitter-feed
@@ -34,21 +30,21 @@ use Illuminate\Filesystem\Filesystem;
 class Controller extends Package
 {
     /**
-     * Package Handle
+     * Package Handle.
      *
      * @var string
      */
     protected $pkgHandle = 'tweet_feed_package';
 
     /**
-     * Application Version Required
+     * Application Version Required.
      *
      * @var string
      */
     protected $appVersionRequired = '5.7.1';
 
     /**
-     * Package Version
+     * Package Version.
      *
      * @var string
      */
@@ -65,7 +61,7 @@ class Controller extends Package
 
     /**
      * Twitter oAuth Consumer Key Secret
-     * Same as above ^
+     * Same as above ^.
      * 
      * @var string
      */
@@ -79,27 +75,27 @@ class Controller extends Package
     public $interest_id = 'f1ed077b16';
 
     /**
-     * Package Name
+     * Package Name.
      *
      * @return string
      */
     public function getPackageName()
     {
-        return t("Twitter Feed Block Components");
+        return t('Twitter Feed Block Components');
     }
 
     /**
-     * Package Description
+     * Package Description.
      *
      * @return string
      */
     public function getPackageDescription()
     {
-        return t("A package that installs a block to allow you to add your twitter feed to any theme.");
+        return t('A package that installs a block to allow you to add your twitter feed to any theme.');
     }
 
     /**
-     * Twitter oAuth Consumer Key Accessor
+     * Twitter oAuth Consumer Key Accessor.
      *
      * @return string
      */
@@ -109,7 +105,7 @@ class Controller extends Package
     }
 
     /**
-     * Twitter oAuth Consumer Secret Accessor
+     * Twitter oAuth Consumer Secret Accessor.
      *
      * @return string
      */
@@ -129,14 +125,14 @@ class Controller extends Package
         if (! class_exists('\C5dev\Package\Thanks\PackageInstallHelper')) {
             // Require composer
             $filesystem = new Filesystem();
-            $filesystem->getRequire(__DIR__ . '/vendor/autoload.php');
+            $filesystem->getRequire(__DIR__.'/vendor/autoload.php');
         }
 
         return new \C5dev\Package\Thanks\PackageInstallHelper($pkg);
     }
 
     /**
-     * Start-up Hook
+     * Start-up Hook.
      *
      * @return void
      */
@@ -153,7 +149,7 @@ class Controller extends Package
     }
 
     /**
-     * Install Hook
+     * Install Hook.
      *
      * @return void
      */
@@ -170,7 +166,7 @@ class Controller extends Package
     }
 
     /**
-     * Unistall Hook
+     * Unistall Hook.
      *
      * @return void
      */
@@ -197,12 +193,12 @@ class Controller extends Package
             'javascript',
             'bootstrap/tab',
             'assets/bootstrap.tab.js',
-            array(
+            [
                 'version' => '3.3.1',
                 'position' => Asset::ASSET_POSITION_FOOTER,
                 'minify' => true,
-                'combine' => true
-            ),
+                'combine' => true,
+            ],
             $this
         );
 
@@ -211,12 +207,12 @@ class Controller extends Package
             'javascript',
             'switchery/js',
             'assets/switchery.js',
-            array(
+            [
                 'version' => '0.7.0',
                 'position' => Asset::ASSET_POSITION_FOOTER,
                 'minify' => true,
-                'combine' => true
-            ),
+                'combine' => true,
+            ],
             $this
         );
 
@@ -224,21 +220,21 @@ class Controller extends Package
             'css',
             'switchery/css',
             'assets/switchery.css',
-            array(
+            [
                 'version' => '0.7.0',
                 'position' => Asset::ASSET_POSITION_HEADER,
                 'minify' => true,
-                'combine' => true
-            ),
+                'combine' => true,
+            ],
             $this
         );
 
         $al->registerGroup(
             'switchery',
-            array(
-                array('css', 'switchery/css'),
-                array('javascript', 'switchery/js')
-            )
+            [
+                ['css', 'switchery/css'],
+                ['javascript', 'switchery/js'],
+            ]
         );
 
         // Block Form Stuff
@@ -246,12 +242,12 @@ class Controller extends Package
             'css',
             'twitterfeed/form',
             'blocks/tweet_feed/css/forms/form.css',
-            array(
+            [
                 'version' => '0.9.5',
                 'position' => Asset::ASSET_POSITION_HEADER,
                 'minify' => true,
-                'combine' => true
-            ),
+                'combine' => true,
+            ],
             $this
         );
     }
