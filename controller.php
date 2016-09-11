@@ -118,15 +118,21 @@ class Controller extends Package
         return $this->twitterConsumerSecret;
     }
 
-    protected function getServiceInstance($pkg)
+    /**
+     * Get a helper instance.
+     * 
+     * @param  mixed $pkg
+     * @return \C5dev\Package\Thanks\PackageInstallHelper
+     */
+    protected function getHelperInstance($pkg)
     {
-        if (! class_exists('\C5dev\Package\Thanks\PackageInstallService')) {
+        if (! class_exists('\C5dev\Package\Thanks\PackageInstallHelper')) {
             // Require composer
             $filesystem = new Filesystem();
             $filesystem->getRequire(__DIR__ . '/vendor/autoload.php');
         }
 
-        return new \C5dev\Package\Thanks\PackageInstallService($pkg);
+        return new \C5dev\Package\Thanks\PackageInstallHelper($pkg);
     }
 
     /**
@@ -141,7 +147,9 @@ class Controller extends Package
         /* @todo Should be IOC based */
         $rh = new TwitterFeedRequestHandler($this);
 
-        $this->getServiceInstance($this)->checkForPostInstall();
+        // Check whether we have just installed the package 
+        // and should redirect to intermediate 'thank you' page.
+        $this->getHelperInstance($this)->checkForPostInstall();
     }
 
     /**
@@ -155,7 +163,8 @@ class Controller extends Package
 
         $bt = BlockType::installBlockTypeFromPackage('tweet_feed', $pkg);
 
-        $this->getServiceInstance($pkg)->addThanksPage();
+        // Install the 'thank you' page if needed.
+        $this->getHelperInstance($pkg)->addThanksPage();
 
         return $pkg;
     }
