@@ -4,9 +4,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * Appearance Form Tab
  *
  * @package  TweetFeedPackage
- * @author   Oliver Green <oliver@c5dev.com>
+ * @author   Oliver Green <oliver@c5labs.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     https://c5dev.com/add-ons/twitter-feed
+ * @link     https://c5labs.com/add-ons/twitter-feed
  */
 ?>
 <div role="tabpanel" class="tab-pane" id="tfAppearance">

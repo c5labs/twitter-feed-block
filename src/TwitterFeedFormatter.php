@@ -4,9 +4,9 @@
  *
  * PHP version 5.4
  *
- * @author   Oliver Green <oliver@c5dev.com>
+ * @author   Oliver Green <oliver@c5labs.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     https://c5dev.com/add-ons/twitter-feed
+ * @link     https://c5labs.com/add-ons/twitter-feed
  */
 namespace Concrete\Package\TweetFeedPackage\Src;
 
@@ -23,9 +23,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
  * If you aren't familiar with tweet entities you may find this link useful:
  * https://dev.twitter.com/overview/api/entities-in-twitter-objects
  *
- * @author   Oliver Green <oliver@c5dev.com>
+ * @author   Oliver Green <oliver@c5labs.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     https://c5dev.com/add-ons/twitter-feed
+ * @link     https://c5labs.com/add-ons/twitter-feed
  */
 class TwitterFeedFormatter
 {

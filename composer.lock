@@ -8,7 +8,7 @@
     "content-hash": "03472534abce4b63c9984c498f284f3d",
     "packages": [
         {
-            "name": "c5dev/thanks-for-installing-components",
+            "name": "c5labs/thanks-for-installing-components",
             "version": "dev-master",
             "source": {
                 "type": "git",
@@ -48,7 +48,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "c5dev/thanks-for-installing-components": 20
+        "c5labs/thanks-for-installing-components": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

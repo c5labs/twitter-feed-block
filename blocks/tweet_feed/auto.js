@@ -2,9 +2,9 @@
 * Block Editor / Form Javascript File
 *
 * @package  TweetFeedPackage
-* @author   Oliver Green <oliver@c5dev.com>
+* @author   Oliver Green <oliver@c5labs.com>
 * @license  http://www.gnu.org/copyleft/gpl.html GPL3
-* @link     https://c5dev.com/add-ons/twitter-feed
+* @link     https://c5labs.com/add-ons/twitter-feed
 */
 function TwitterFeedBlockEditor(base_url, csrf_token)
 {
@@ -14,9 +14,9 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      * General functions used on all editor tabs
      *
      * @package  TweetFeedPackage
-     * @author   Oliver Green <oliver@c5dev.com>
+     * @author   Oliver Green <oliver@c5labs.com>
      * @license  http://www.gnu.org/copyleft/gpl.html GPL3
-     * @link     https://c5dev.com/add-ons/twitter-feed
+     * @link     https://c5labs.com/add-ons/twitter-feed
      */
 
     /**
@@ -151,9 +151,9 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      * Account Tab Specific
      *
      * @package  TweetFeedPackage
-     * @author   Oliver Green <oliver@c5dev.com>
+     * @author   Oliver Green <oliver@c5labs.com>
      * @license  http://www.gnu.org/copyleft/gpl.html GPL3
-     * @link     https://c5dev.com/add-ons/twitter-feed
+     * @link     https://c5labs.com/add-ons/twitter-feed
      */
     
     /**

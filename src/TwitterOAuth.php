@@ -8,8 +8,8 @@
  *
  * PHP version 5.4
  *
- * @author   Oliver Green <oliver@c5dev.com>
- * @link     https://c5dev.com/add-ons/twitter-feed
+ * @author   Oliver Green <oliver@c5labs.com>
+ * @link     https://c5labs.com/add-ons/twitter-feed
  */
 namespace Concrete\Package\TweetFeedPackage\Src;
 

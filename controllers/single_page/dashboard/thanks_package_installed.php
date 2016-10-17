@@ -4,9 +4,9 @@
  *
  * PHP version 5.4
  *
- * @author   Oliver Green <oliver@c5dev.com>
+ * @author   Oliver Green <oliver@c5labs.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     https://c5dev.com/add-ons/twitter-feed
+ * @link     https://c5labs.com/add-ons/twitter-feed
  */
 namespace Concrete\Package\TweetFeedPackage\Controller\SinglePage\Dashboard;
 
@@ -17,9 +17,9 @@ use C5dev\Package\Thanks\DashboardPageController;
 /**
  * Post-install Single Page Controller Class.
  *
- * @author   Oliver Green <oliver@c5dev.com>
+ * @author   Oliver Green <oliver@c5labs.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GPL3
- * @link     https://c5dev.com/
+ * @link     https://c5labs.com/
  */
 class ThanksPackageInstalled extends DashboardPageController
 {
