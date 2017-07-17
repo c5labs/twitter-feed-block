@@ -147,7 +147,7 @@ class TwitterFeedFormatter
                     .$this->entity_css_classes['media'].'">'.$media->display_url.'</a>';
                 }
 
-                return '<img src="'.$media->media_url.'" alt="'.$media->display_url
+                return '<img src="'.$media->media_url_https.'" alt="'.$media->display_url
                 .'" class="'.$this->entity_css_classes['media'].'">';
             },
 
