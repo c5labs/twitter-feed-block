@@ -192,9 +192,11 @@ class TwitterFeedService
         if ($item->isMiss()) {
             $response = $this->getConnection($account)->get($params['request_endpoint'], $params);
             $item->set($response, $cache_ttl);
+        } else {
+            $response = $item->get();
         }
 
-        return $item->get();
+        return $response;
     }
 
     /**
