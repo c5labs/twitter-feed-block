@@ -287,8 +287,6 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      * @return {void}
      */
     $('#tfSavePinBtn').click(function () {
-        hidePinScreen();
-        showAuthorizingScreen();
         authorizePin();
     });
 
@@ -448,7 +446,15 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      */
     function authorizePin()
     {
-        var pin = $('#tfPinField').val();
+        var pin = $('#tfPinField').val().trim();
+
+        if (7 !== pin.length) {
+            alert('Please enter the 7 digit PIN number provided to you in the popup twitter authentication dialog.');
+            return;
+        }
+
+        hidePinScreen();
+        showAuthorizingScreen();
 
         $.ajax({
             url: base_url + '/auth-pin/' + oAuthToken + '/' + pin + '?csrf_token=' + csrf_token,
