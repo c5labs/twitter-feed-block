@@ -10,6 +10,7 @@
  */
 namespace Concrete\Package\TweetFeedPackage\Src;
 
+use Log;
 use Core;
 use Route;
 use Database;
@@ -48,16 +49,6 @@ class TwitterFeedRequestHandler
         $rh = $this;
 
         /*
-         * Callback route used by twitter
-         */
-        Route::register(
-            '/twitter-feed-package/callback',
-            function () use ($rh) {
-                $rh->handleCallbackFromTwitter();
-            }
-        );
-
-        /*
          * Returns twitter oAuth authorzation url
          * to edit form AJAX client.
          */
@@ -86,6 +77,16 @@ class TwitterFeedRequestHandler
             '/twitter-feed-package/auth-status/{token}',
             function ($token) use ($rh) {
                 return $rh->handleAuthorizationStatus($token);
+            }
+        );
+
+        /*
+         * Authorize PIN
+         */
+        Route::register(
+            '/twitter-feed-package/auth-pin/{token}/{pin}',
+            function ($token, $pin) use ($rh) {
+                return $rh->handlePinAuthorization($token, $pin);
             }
         );
     }
@@ -192,6 +193,26 @@ class TwitterFeedRequestHandler
     }
 
     /**
+     * Renders an exception as JSON.
+     * 
+     * @param  Exception $ex
+     * @return void
+     */
+    protected function renderJsonException(Exception $ex)
+    {
+        header('HTTP/1.0 500 Server Error', true, 500);
+        header('Content-Type', 'application/json');
+
+        $data = [
+            'message' => $ex->getMessage(),
+        ];
+
+        $json = json_encode($data, JSON_PRETTY_PRINT);
+
+        die($json);
+    }
+
+    /**
      * Outputs the authorization redirection page, this shows a 'we are redirecting
      * you to twitter' page and redirects them via JS to twitter to authorize our app.
      *
@@ -207,6 +228,8 @@ class TwitterFeedRequestHandler
         } else {
             $callback_url = \URL::to('/twitter-feed-package/callback')->__toString();
         }
+
+        $callback_url = 'oob';
 
         $a = $this->getAuthorizationRepository();
 
@@ -231,29 +254,35 @@ class TwitterFeedRequestHandler
     }
 
     /**
-     * Outputs a success or failure message to the browser after twitter
-     * redirects the user back to us from the step above. It also saves the
-     * long lasting access tokens to database.
-     *
+     * Authorize a PIN.
+     * 
      * @return void
      */
-    protected function handleCallbackFromTwitter()
+    protected function handlePinAuthorization($token, $pin)
     {
-        $a = $this->getAuthorizationRepository();
-
         try {
-            if (isset($_REQUEST['denied'])) {
-                throw new Exception('You cancelled the authorization request.');
+            $this->checkCSRFToken();
+
+            if (empty($pin)) {
+                throw new Exception('No PIN was specified.');
             }
 
-            $oauth_tokens = $a->getEntryByToken($_REQUEST['oauth_token']);
+            if (empty($token)) {
+                throw new Exception('No oauth token was specified.');
+            }
+
+            $a = $this->getAuthorizationRepository();
+
+            $oauth_tokens = $a->getEntryByToken($token);
 
             $response = $this->getTwitterFeedService()->requestAccessToken(
                 $oauth_tokens['oauth_token'],
-                $oauth_tokens['oauth_token_secret']
+                $oauth_tokens['oauth_token_secret'],
+                intval($pin)
             );
         } catch (Exception $ex) {
-            $this->renderErrorPage($ex);
+            Log::addEntry($ex->getMessage() . ' in ' . $ex->getFile() . ' @ ' . $ex->getLine());
+            $this->renderJsonException($ex);
         }
 
         $a->updateEntryByToken(
@@ -263,15 +292,12 @@ class TwitterFeedRequestHandler
             $response['screen_name']
         );
 
-        $template_data = [
-            'twitter_handle' => $response['screen_name'],
-            'logo_url' => $this->package->getRelativePath().'/icon.png',
-            'page_title' => t('Account Authorized'),
-            'page_header' => '@'.$response['screen_name'].t(' has been authorized!'),
-            'page_content' => t('You can close this window and head back to your site, have a nice day!'),
-        ];
-        $html = $this->compileFromFile(__DIR__.'/../templates/authorized.template.html', $template_data);
-        die($html);
+         return json_encode(
+            [
+                'acID' => $oauth_tokens['acID'],
+                'twitter_handle' => $response['screen_name'],
+            ]
+        );
     }
 
     /**

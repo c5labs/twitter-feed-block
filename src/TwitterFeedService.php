@@ -113,12 +113,15 @@ class TwitterFeedService
      * @param  string $oauth_token_secret
      * @return array $access_token & $access_token_secret
      */
-    public function requestAccessToken($oauth_token, $oauth_token_secret)
+    public function requestAccessToken($oauth_token, $oauth_token_secret, $verifier = null)
     {
         /* Create TwitteroAuth object with app key/secret and token key/secret from default phase */
         $connection = new TwitterOAuth($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
+
+        $verifier = !empty($verifier) ? $verifier : trim($_REQUEST['oauth_verifier']);
+
         /* Request access tokens from twitter */
-        $access_token = $connection->getAccessToken($_REQUEST['oauth_verifier']);
+        $access_token = $connection->getAccessToken($verifier);
 
         /* If HTTP response is 200 continue otherwise send to connect page to retry */
         if (200 == $connection->http_code) {

@@ -73,3 +73,15 @@ defined('C5_EXECUTE') or die('Access Denied.');
         <a href="javascript:void(0)" id="tfCancelBtn"><?php echo t('or cancel'); ?></a>
     </p>
 </div>
+
+<!-- Pin Screen !-->
+<div role="tabpanel" class="tab-pane text-center" id="tfPin">
+    <h2><?php echo t('Enter Twitter PIN'); ?></h2>
+    <div class="input-group" style="margin: 0 auto 20px;">
+        <input type="text" id="tfPinField" name="pin" placeholder="e.g. 123456" class="form-control">
+    </div>
+    <p>
+        <a href="javascript:void(0)" class="btn btn-primary" id="tfSavePinBtn"><?php echo t('Authorize'); ?></a>
+        <a href="javascript:void(0)" id="tfPinCancelBtn"><?php echo t('or cancel'); ?></a>
+    </p>
+</div>

@@ -266,8 +266,8 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      */  
     $('#tfAddAccount, #tfRetryBtn, #tfAddFirstAccount').click(function () {
         openOAuthWindow();
-        showAuthorizingScreen();
         startPolling();
+        showPinScreen();
     });
 
     /**
@@ -275,9 +275,21 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
      * 
      * @return {void}
      */
-    $('#tfCancelBtn').click(function () {
-        hideAuthorizingScreen();
+    $('#tfCancelBtn, #tfPinCancelBtn').click(function () {
+        hideAuthorizingScreen(false);
+        hidePinScreen();
         stopPoll();
+    });
+
+    /**
+     * Save PIN button
+     * 
+     * @return {void}
+     */
+    $('#tfSavePinBtn').click(function () {
+        hidePinScreen();
+        showAuthorizingScreen();
+        authorizePin();
     });
 
     /**
@@ -307,6 +319,36 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
         $('#tfAuthorizing').removeClass('active');
 
         if ($('#tfFormContainer').hasClass('tf-first-run') && !accountAdded) {
+            $('#tfFirstRun').addClass('active');
+        } else {
+            $('#tfFirstRun').removeClass('active');
+            $('#tfAccounts').addClass('active');
+            removeFirstRun(); // @see form.php
+        }
+    }
+
+    /**
+     * Show the form requesting the PIN from twitter.
+     * 
+     * @return void
+     */
+    function showPinScreen()
+    {
+        $('#tfPin').addClass('active');
+        $('#tfFirstRun').removeClass('active');
+        $('#tfAccounts').removeClass('active');
+    }
+
+    /**
+     * Hide the PIN form.
+     * 
+     * @return void
+     */
+    function hidePinScreen()
+    {
+        $('#tfPin').removeClass('active');
+
+        if ($('#tfFormContainer').hasClass('tf-first-run')) {
             $('#tfFirstRun').addClass('active');
         } else {
             $('#tfFirstRun').removeClass('active');
@@ -379,7 +421,7 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
                 }
             })
             .fail(function() {
-                alert(ccm_t('polling-problem'));
+                alert(ccm_t('pin-problem'));
                 stopPoll();
             })
             .always(function() {
@@ -397,6 +439,31 @@ function TwitterFeedBlockEditor(base_url, csrf_token)
     function stopPoll()
     {
         stopPollInterval = true;
+    }
+
+    /**
+     * Authorize the PIN entered.
+     * 
+     * @return void
+     */
+    function authorizePin()
+    {
+        var pin = $('#tfPinField').val();
+
+        $.ajax({
+            url: base_url + '/auth-pin/' + oAuthToken + '/' + pin + '?csrf_token=' + csrf_token,
+            type: 'GET',
+            dataType: 'json',
+        })
+        .fail(function() {
+            alert(ccm_t('pin-problem'));
+            hideAuthorizingScreen(false);
+            stopPoll();
+        })
+        .always(function() {
+            requestInProgess = false;
+            $('#tfPinField').val('');
+        });
     }
 
     /**

@@ -267,6 +267,7 @@ class Controller extends BlockController
             'no-accounts-message' => t('No accounts authorized'),
             'search-control-placeholder' => t('your search term'),
             'account-removal-failure' => t('Failed to remove the account, please try again later.'),
+            'pin-problem' => t('There was a problem authorizing the PIN you provided, please try again.'),
             'polling-problem' => t('There was a problem getting the status of the authorization, you will need to close and re-open the block editor window for the account to become visible.'),
         ];
     }
