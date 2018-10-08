@@ -14,6 +14,6 @@
         }
     ],
     "require": {
-        "c5labs/thanks-for-installing-components": "dev-master"
+        "c5dev/thanks-for-installing-components": "dev-master"
     }
 }
